@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // PluralGroup is a group of locales with the same plural rules.
@@ -12,9 +15,11 @@ type PluralGroup struct {
 	PluralRules []PluralRule
 }
 
+var titleCaser = cases.Title(language.AmericanEnglish)
+
 // Name returns a unique name for this plural group.
 func (pg *PluralGroup) Name() string {
-	n := strings.Title(pg.Locales)
+	n := titleCaser.String(pg.Locales)
 	return strings.Replace(n, " ", "", -1)
 }
 
@@ -31,7 +36,7 @@ type PluralRule struct {
 
 // CountTitle returns the title case of the PluralRule's count.
 func (pr *PluralRule) CountTitle() string {
-	return strings.Title(pr.Count)
+	return titleCaser.String(pr.Count)
 }
 
 // Condition returns the condition where the PluralRule applies.
@@ -81,7 +86,7 @@ func (pr *PluralRule) GoCondition() string {
 			if parts == nil {
 				continue
 			}
-			lvar, lmod, op, rhs := strings.Title(parts[1]), parts[2], parts[3], strings.TrimSpace(parts[4])
+			lvar, lmod, op, rhs := titleCaser.String(parts[1]), parts[2], parts[3], strings.TrimSpace(parts[4])
 			if op == "=" {
 				op = "=="
 			}
