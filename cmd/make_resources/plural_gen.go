@@ -10,21 +10,21 @@ import (
 )
 
 const (
-	//pluralTypeOrdinal  = "ordinal"
+	// pluralTypeOrdinal  = "ordinal"
 	pluralTypeCardinal = "cardinal"
 )
 
-//pluralRules generates plural_ordinals.go and plural_cardinals.go based on the CLDR data. It returns a map of all
-//locale codes for which there are plural rules, mapped to their function name
+// pluralRules generates plural_ordinals.go and plural_cardinals.go based on the CLDR data. It returns a map of all
+// locale codes for which there are plural rules, mapped to their function name
 func pluralRules(data *cldr.SupplementalData) map[string]string {
-	//pluralGroupsOrdinal := make([]PluralGroup, 0, 50)
+	// pluralGroupsOrdinal := make([]PluralGroup, 0, 50)
 	pluralGroupsCardinal := make([]PluralGroup, 0, 50)
 	pluralLocales := make(map[string]bool, 250)
 	for _, plurals := range data.Plurals {
 		var pluralGroup *[]PluralGroup
-		//pluralGroup := new([]PluralGroup)
+		// pluralGroup := new([]PluralGroup)
 		switch plurals.Type {
-		//case pluralTypeOrdinal:
+		// case pluralTypeOrdinal:
 		//	pluralGroup = &pluralGroupsOrdinal
 		case pluralTypeCardinal:
 			pluralGroup = &pluralGroupsCardinal
@@ -59,20 +59,20 @@ func pluralRules(data *cldr.SupplementalData) map[string]string {
 		PluralGroups []PluralGroup
 		LocaleMap    map[string]string
 	}
-	//ordinalData := pluralTemplateData{
+	// ordinalData := pluralTemplateData{
 	//	PluralType:   strings.Title(pluralTypeOrdinal),
 	//	PluralGroups: pluralGroupsOrdinal,
-	//}
-	//ordinalsFile := filepath.Join(resourcesDir, "aaa_plural_ordinals.go")
-	//err := executeAndWrite(pluralTemplate, ordinalData, ordinalsFile)
-	//if err != nil {
+	// }
+	// ordinalsFile := filepath.Join(resourcesDir, "aaa_plural_ordinals.go")
+	// err := executeAndWrite(pluralTemplate, ordinalData, ordinalsFile)
+	// if err != nil {
 	//	panic(err)
-	//}
-	//ordinalsTestFile := filepath.Join(resourcesDir, "aaa_plural_ordinals_test.go")
-	//err = executeAndWrite(pluralTestTemplate, ordinalData, ordinalsTestFile)
-	//if err != nil {
+	// }
+	// ordinalsTestFile := filepath.Join(resourcesDir, "aaa_plural_ordinals_test.go")
+	// err = executeAndWrite(pluralTestTemplate, ordinalData, ordinalsTestFile)
+	// if err != nil {
 	//	panic(err)
-	//}
+	// }
 	localeMap := make(map[string]string)
 	for i, group := range pluralGroupsCardinal {
 		for _, locale := range group.SplitLocales() {
@@ -82,7 +82,7 @@ func pluralRules(data *cldr.SupplementalData) map[string]string {
 
 	cardinalData := pluralTemplateData{
 		CLDRPackage:  cldrPackage,
-		PluralType:   strings.Title(pluralTypeCardinal),
+		PluralType:   titleCaser.String(pluralTypeCardinal),
 		PluralGroups: pluralGroupsCardinal,
 		LocaleMap:    localeMap,
 	}
@@ -100,8 +100,8 @@ func pluralRules(data *cldr.SupplementalData) map[string]string {
 	return localeMap
 }
 
-//pluralLocaleFunc finds the best match for loc that exists in pluralLocales and returns the func name
-//e.g. cardinal_1
+// pluralLocaleFunc finds the best match for loc that exists in pluralLocales and returns the func name
+// e.g. cardinal_1
 func pluralLocale(loc string, pluralLocaleFuncs map[string]string) string {
 	tag := language.Make(loc)
 	for {
