@@ -7,7 +7,7 @@ import (
 	"golang.org/x/text/language"
 )
 
-//GetLocale retrieves the cldr.Locale object for the supplied language tag.
+// GetLocale retrieves the cldr.Locale object for the supplied language tag.
 func GetLocale(tag language.Tag) (*cldr.Locale, error) {
 	locFunc, ok := localeData[tag]
 	if ok {

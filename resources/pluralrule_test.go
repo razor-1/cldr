@@ -17,6 +17,7 @@ type pluralFormTest struct {
 }
 
 func runTests(t *testing.T, tag language.Tag, tests []pluralFormTest) {
+	t.Helper()
 	if tag.IsRoot() {
 		return
 	}
@@ -35,7 +36,6 @@ func runTests(t *testing.T, tag language.Tag, tests []pluralFormTest) {
 	} else {
 		t.Errorf("could not find plural rule for locale %s", tag.String())
 	}
-
 }
 
 func appendIntegerTests(tests []pluralFormTest, form plural.Form, examples []string) []pluralFormTest {

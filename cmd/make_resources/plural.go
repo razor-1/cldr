@@ -20,7 +20,7 @@ var titleCaser = cases.Title(language.AmericanEnglish)
 // Name returns a unique name for this plural group.
 func (pg *PluralGroup) Name() string {
 	n := titleCaser.String(pg.Locales)
-	return strings.Replace(n, " ", "", -1)
+	return strings.ReplaceAll(n, " ", "")
 }
 
 // SplitLocales returns all the locales in the PluralGroup as a slice.
@@ -47,7 +47,7 @@ func (pr *PluralRule) Condition() string {
 
 // Examples returns the integer and decimal exmaples for the PluralRule.
 func (pr *PluralRule) Examples() (integer []string, decimal []string) {
-	ex := strings.Replace(pr.Rule, ", …", "", -1)
+	ex := strings.ReplaceAll(pr.Rule, ", …", "")
 	ddelim := "@decimal"
 	if i := strings.Index(ex, ddelim); i > 0 {
 		dex := strings.TrimSpace(ex[i+len(ddelim):])
@@ -78,7 +78,7 @@ var relationRegexp = regexp.MustCompile(`([niftvw])(?:\s*%\s*([0-9]+))?\s*(!=|=)
 
 // GoCondition converts the XML condition to valid Go code.
 func (pr *PluralRule) GoCondition() string {
-	var ors []string
+	ors := make([]string, 0)
 	for _, and := range strings.Split(pr.Condition(), "or") {
 		var ands []string
 		for _, relation := range strings.Split(and, "and") {
@@ -96,6 +96,7 @@ func (pr *PluralRule) GoCondition() string {
 			for _, rh := range strings.Split(rhs, ",") {
 				if parts := strings.Split(rh, ".."); len(parts) == 2 {
 					from, to := parts[0], parts[1]
+					//nolint:gocritic //ifElseChain is more readable here
 					if lvar == "ops.N" {
 						if lmod != "" {
 							rhor = append(rhor, fmt.Sprintf("ops.NModInRange(%s, %s, %s)", lmod, from, to))
@@ -114,6 +115,7 @@ func (pr *PluralRule) GoCondition() string {
 
 			if len(rany) > 0 {
 				rh := strings.Join(rany, ",")
+				//nolint:gocritic //ifElseChain is more readable here
 				if lvar == "ops.N" {
 					if lmod != "" {
 						rhor = append(rhor, fmt.Sprintf("ops.NModEqualsAny(%s, %s)", lmod, rh))

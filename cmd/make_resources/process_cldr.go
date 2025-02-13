@@ -278,7 +278,6 @@ func processCalendarTimeFormats(ldmlCar *cldr.Calendar, calendar *i18n.Calendar)
 			}
 		}
 	}
-
 }
 
 func processCalendarMonths(ldmlCar *cldr.Calendar, calendar *i18n.Calendar) {
@@ -340,7 +339,6 @@ func processCalendarDays(ldmlCar *cldr.Calendar, calendar *i18n.Calendar) {
 				var i18nDay i18n.CalendarDayFormatNameValue
 				for _, d := range days.Day {
 					setDayName(d.Type, d.Data(), &i18nDay)
-
 				}
 				switch days.Type {
 				case typeAbbreviated:

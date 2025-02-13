@@ -80,65 +80,65 @@ type datetimePatternComponent struct {
 	componentType int
 }
 
-//FmtDateFull returns the full date format for the calendar
+// FmtDateFull returns the full date format for the calendar
 func (c Calendar) FmtDateFull(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Date.Full)
 }
 
-//FmtDateLong returns the full date format for the calendar
+// FmtDateLong returns the full date format for the calendar
 func (c Calendar) FmtDateLong(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Date.Long)
 }
 
-//FmtDateMedium returns the full date format for the calendar
+// FmtDateMedium returns the full date format for the calendar
 func (c Calendar) FmtDateMedium(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Date.Medium)
 }
 
-//FmtDateShort returns the full date format for the calendar
+// FmtDateShort returns the full date format for the calendar
 func (c Calendar) FmtDateShort(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Date.Short)
 }
 
-//FmtTimeFull returns the full date format for the calendar
+// FmtTimeFull returns the full date format for the calendar
 func (c Calendar) FmtTimeFull(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Time.Full)
 }
 
-//FmtTimeLong returns the full date format for the calendar
+// FmtTimeLong returns the full date format for the calendar
 func (c Calendar) FmtTimeLong(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Time.Long)
 }
 
-//FmtTimeMedium returns the full date format for the calendar
+// FmtTimeMedium returns the full date format for the calendar
 func (c Calendar) FmtTimeMedium(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Time.Medium)
 }
 
-//FmtTimeShort returns the full date format for the calendar
+// FmtTimeShort returns the full date format for the calendar
 func (c Calendar) FmtTimeShort(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Time.Short)
 }
 
-//FmtDateTimeFull returns the full date format for the calendar
+// FmtDateTimeFull returns the full date format for the calendar
 func (c Calendar) FmtDateTimeFull(t time.Time) (string, error) {
 	pattern := getDateTimePattern(c.Formats.DateTime.Full, c.Formats.Date.Full, c.Formats.Time.Full)
 	return c.Format(t, pattern)
 }
 
-//FmtDateTimeLong returns the full date format for the calendar
+// FmtDateTimeLong returns the full date format for the calendar
 func (c Calendar) FmtDateTimeLong(t time.Time) (string, error) {
 	pattern := getDateTimePattern(c.Formats.DateTime.Long, c.Formats.Date.Long, c.Formats.Time.Long)
 	return c.Format(t, pattern)
 }
 
-//FmtDateTimeMedium returns the full date format for the calendar
+// FmtDateTimeMedium returns the full date format for the calendar
 func (c Calendar) FmtDateTimeMedium(t time.Time) (string, error) {
 	pattern := getDateTimePattern(c.Formats.DateTime.Medium, c.Formats.Date.Medium, c.Formats.Time.Medium)
 	return c.Format(t, pattern)
 }
 
-//FmtDateTimeShort returns the full date format for the calendar
+// FmtDateTimeShort returns the full date format for the calendar
 func (c Calendar) FmtDateTimeShort(t time.Time) (string, error) {
 	pattern := getDateTimePattern(c.Formats.DateTime.Short, c.Formats.Date.Short, c.Formats.Time.Short)
 	return c.Format(t, pattern)
@@ -251,7 +251,6 @@ func (c Calendar) formatDateTimeComponentYearLengthWide(year int) string {
 
 // formatDateTimeComponentMonth renders a month component.
 func (c Calendar) formatDateTimeComponentMonth(datetime time.Time, length int) (string, error) {
-
 	month := int(datetime.Month())
 
 	switch length {
@@ -515,7 +514,7 @@ func (c Calendar) formatDateTimeComponentDay(datetime time.Time, length int) (st
 func (c Calendar) formatDateTimeComponentHour12(datetime time.Time, length int) (string, error) {
 	hour := datetime.Hour()
 	if hour > 12 {
-		hour = hour - 12
+		hour -= 12
 	}
 
 	switch length {
@@ -631,10 +630,11 @@ func (c Calendar) formatDateTimeComponentPeriodNarrow(hour int) string {
 
 // formatDateTimeComponentQuarter renders a calendar quarter component - this
 // is calendar quarters and not fiscal quarters.
-//  - Q1: Jan-Mar
-//  - Q2: Apr-Jun
-//  - Q3: Jul-Sep
-//  - Q4: Oct-Dec
+//   - Q1: Jan-Mar
+//   - Q2: Apr-Jun
+//   - Q3: Jul-Sep
+//   - Q4: Oct-Dec
+//
 // TODO: not yet implemented
 func (c Calendar) formatDateTimeComponentQuarter(datetime time.Time, length int) (string, error) {
 	return "", nil
@@ -695,7 +695,6 @@ func (c Calendar) parseDateTimeFormat(pattern string) ([]*datetimePatternCompone
 			format = append(format, component)
 			i = nextQuote + i + 2
 			continue
-
 		}
 		if (char >= "a" && char <= "z") || (char >= "A" && char <= "Z") {
 			// this represents a format unit
@@ -710,7 +709,6 @@ func (c Calendar) parseDateTimeFormat(pattern string) ([]*datetimePatternCompone
 			format = append(format, component)
 			i = endChar + 1
 			continue
-
 		}
 		if char == string(datetimeFormatTimeSeparator) {
 			component := &datetimePatternComponent{
@@ -721,7 +719,6 @@ func (c Calendar) parseDateTimeFormat(pattern string) ([]*datetimePatternCompone
 			format = append(format, component)
 			i++
 			continue
-
 		}
 
 		component := &datetimePatternComponent{
@@ -732,7 +729,6 @@ func (c Calendar) parseDateTimeFormat(pattern string) ([]*datetimePatternCompone
 		format = append(format, component)
 		i++
 		continue
-
 	}
 
 	return format, nil
@@ -747,10 +743,10 @@ func getDateTimePattern(datetimePattern, datePattern, timePattern string) string
 
 // lastSequenceIndex looks at the first character in a string and returns the
 // last digits of the first sequence of that character. For example:
-//  - ABC: 0
-//  - AAB: 1
-//  - ABA: 0
-//  - AAA: 2
+//   - ABC: 0
+//   - AAB: 1
+//   - ABA: 0
+//   - AAA: 2
 func lastSequenceIndex(str string) int {
 	if len(str) == 0 {
 		return -1
