@@ -42,12 +42,12 @@ var (
 func (n Number) FmtCurrency(currency string, number float64) (formatted string, err error) {
 	format := n.parseFormat(n.Formats.Currency, true)
 	result := n.formatNumber(format, number)
-	formatted = strings.Replace(result, currencyPlaceholder, n.findCurrency(currency).Symbol, -1)
+	formatted = strings.ReplaceAll(result, currencyPlaceholder, n.findCurrency(currency).Symbol)
 	return
 }
 
-//FmtCurrencyAccounting is the same as FmtCurrency, but using the accounting format in the CLDR. If the accounting
-//format is missing, it falls back on the standard format (the same one used in FmtCurrency).
+// FmtCurrencyAccounting is the same as FmtCurrency, but using the accounting format in the CLDR. If the accounting
+// format is missing, it falls back on the standard format (the same one used in FmtCurrency).
 func (n Number) FmtCurrencyAccounting(currency string, number float64) (formatted string, err error) {
 	var formatToUse string
 	if n.Formats.CurrencyAccounting != "" {
@@ -57,21 +57,21 @@ func (n Number) FmtCurrencyAccounting(currency string, number float64) (formatte
 	}
 	format := n.parseFormat(formatToUse, true)
 	result := n.formatNumber(format, number)
-	formatted = strings.Replace(result, currencyPlaceholder, n.findCurrency(currency).Symbol, -1)
+	formatted = strings.ReplaceAll(result, currencyPlaceholder, n.findCurrency(currency).Symbol)
 	return
 }
 
-//FmtCurrencyWhole does exactly what FmtCurrency does, but it leaves off
-//any decimal places. AKA, it would return $100 rather than $100.00.
+// FmtCurrencyWhole does exactly what FmtCurrency does, but it leaves off
+// any decimal places. AKA, it would return $100 rather than $100.00.
 func (n Number) FmtCurrencyWhole(currency string, number float64) (formatted string, err error) {
 	format := n.parseFormat(n.Formats.Currency, false)
 	result := n.formatNumber(format, number)
-	formatted = strings.Replace(result, currencyPlaceholder, n.findCurrency(currency).Symbol, -1)
+	formatted = strings.ReplaceAll(result, currencyPlaceholder, n.findCurrency(currency).Symbol)
 	return
 }
 
-//FmtCurrencyAccountingWhole is the accounting equivalent of FmtCurrencyWhole. It falls back on the standard format
-//if the accounting format is missing.
+// FmtCurrencyAccountingWhole is the accounting equivalent of FmtCurrencyWhole. It falls back on the standard format
+// if the accounting format is missing.
 func (n Number) FmtCurrencyAccountingWhole(currency string, number float64) (formatted string, err error) {
 	var formatToUse string
 	if n.Formats.CurrencyAccounting != "" {
@@ -81,7 +81,7 @@ func (n Number) FmtCurrencyAccountingWhole(currency string, number float64) (for
 	}
 	format := n.parseFormat(formatToUse, false)
 	result := n.formatNumber(format, number)
-	formatted = strings.Replace(result, currencyPlaceholder, n.findCurrency(currency).Symbol, -1)
+	formatted = strings.ReplaceAll(result, currencyPlaceholder, n.findCurrency(currency).Symbol)
 	return
 }
 
@@ -159,13 +159,13 @@ func (n Number) parseFormat(pattern string, includeDecimalDigits bool) *numberFo
 		pat = pat[0:pos]
 	}
 
-	p := strings.Replace(pat, ",", "", -1)
+	p := strings.ReplaceAll(pat, ",", "")
 	pos = strings.Index(p, "0")
 	if pos != -1 {
 		format.minIntegerDigits = strings.LastIndex(p, "0") - pos + 1
 	}
 
-	p = strings.Replace(pat, "#", "0", -1)
+	p = strings.ReplaceAll(pat, "#", "0")
 	pos = strings.LastIndex(pat, ",")
 	if pos != -1 {
 		format.groupSizeFinal = strings.LastIndex(p, "0") - pos
@@ -185,7 +185,7 @@ func (n Number) parseFormat(pattern string, includeDecimalDigits bool) *numberFo
 	return format
 }
 
-//getFormatMultiplier returns the multiplier to use based on the pattern
+// getFormatMultiplier returns the multiplier to use based on the pattern
 func getFormatMultiplier(pat string) int {
 	if strings.Contains(pat, "%") {
 		return 100
@@ -223,7 +223,7 @@ func (n Number) formatNumber(format *numberFormat, number float64) string {
 
 	// make sure the minimum # decimal digits are there
 	for len(decimal) < format.minDecimalDigits {
-		decimal = decimal + "0"
+		decimal += "0"
 	}
 
 	// make sure the minimum # integer digits are there
@@ -233,7 +233,7 @@ func (n Number) formatNumber(format *numberFormat, number float64) string {
 
 	// if there's a decimal portion, prepend the decimal point symbol
 	if len(decimal) > 0 {
-		decimal = string(n.Symbols.Decimal) + decimal
+		decimal = n.Symbols.Decimal + decimal
 	}
 
 	// put the integer portion into properly sized groups
@@ -257,8 +257,8 @@ func (n Number) formatNumber(format *numberFormat, number float64) string {
 	}
 
 	// replace percents and permilles with the local symbols (likely to be exactly the same)
-	formatted = strings.Replace(formatted, "%", string(n.Symbols.Percent), -1)
-	formatted = strings.Replace(formatted, "‰", string(n.Symbols.PerMille), -1)
+	formatted = strings.ReplaceAll(formatted, "%", n.Symbols.Percent)
+	formatted = strings.ReplaceAll(formatted, "‰", n.Symbols.PerMille)
 
 	return formatted
 }
@@ -312,7 +312,7 @@ func numberRound(number float64, decimals int) string {
 	difference := number - backToNum
 	half := 0.5
 	for i := 0; i < decimals; i++ {
-		half = half / 10
+		half /= 10
 	}
 
 	roundUp := false

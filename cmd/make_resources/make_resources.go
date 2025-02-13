@@ -37,14 +37,14 @@ const (
 )
 
 type templateData struct {
-	LocaleCode    string
-	CLDRPackage   string
-	Symbols       i18n.Symbols
-	NumberFormats i18n.NumberFormats
-	Calendar      i18n.Calendar
-	Currencies    i18n.Currencies
-	Languages     languages
-	Territories   territories
+	LocaleCode           string
+	CLDRPackage          string
+	Symbols              i18n.Symbols
+	NumberFormats        i18n.NumberFormats
+	Calendar             i18n.Calendar
+	Currencies           i18n.Currencies
+	Languages            languages
+	Territories          territories
 	LocaleDisplayPattern i18n.LocaleDisplayPattern
 }
 
@@ -55,7 +55,7 @@ type aggregateData struct {
 	mutex       sync.Mutex
 }
 
-//makePath is a helper to create a path if needed, and panic if MkdirAll encounters an error
+// makePath is a helper to create a path if needed, and panic if MkdirAll encounters an error
 func makePath(path string) {
 	if _, err := os.Stat(path); err != nil {
 		if err = os.MkdirAll(path, 0777); err != nil {
@@ -66,7 +66,7 @@ func makePath(path string) {
 
 func main() {
 	var decoder cldr.Decoder
-	//maybe have this decode the zip, and download it if not present
+	// maybe have this decode the zip, and download it if not present
 	unicodeCLDR, err := decoder.DecodePath("data/core")
 	if err != nil {
 		panic(err)
@@ -83,8 +83,8 @@ func main() {
 		localeData.Locales[loc] = true
 	}
 
-	//aggregate stores everything we've seen across all locales
-	//this ensures that we generate our constants packages with all needed data
+	// aggregate stores everything we've seen across all locales
+	// this ensures that we generate our constants packages with all needed data
 	aggregate := aggregateData{
 		Currencies:  make(i18n.Currencies, 500),
 		Languages:   make(languages, 500),
@@ -106,14 +106,14 @@ func main() {
 			localeFile := filepath.Join(path, locale+".go")
 
 			tplData := templateData{
-				LocaleCode:    locale,
-				CLDRPackage:   cldrPackage,
-				Symbols:       number.Symbols,
-				NumberFormats: number.Formats,
-				Calendar:      localeData.Calendars[locale],
-				Currencies:    number.Currencies,
-				Languages:     localeData.Languages[locale],
-				Territories:   localeData.Territories[locale],
+				LocaleCode:           locale,
+				CLDRPackage:          cldrPackage,
+				Symbols:              number.Symbols,
+				NumberFormats:        number.Formats,
+				Calendar:             localeData.Calendars[locale],
+				Currencies:           number.Currencies,
+				Languages:            localeData.Languages[locale],
+				Territories:          localeData.Territories[locale],
 				LocaleDisplayPattern: localeData.DisplayPattern[locale],
 			}
 			err = executeAndWrite(filepath.Join(templatesDir, "locales.tpl"), tplData, localeFile)
@@ -133,12 +133,11 @@ func main() {
 			for k, v := range tplData.Territories {
 				aggregate.Territories[k] = v
 			}
-
 		}(locale, number)
 	}
 	wg.Wait()
 
-	//create the currency, language and territory constants
+	// create the currency, language and territory constants
 	currencyPath := filepath.Join(resourcesDir, currencyDir)
 	makePath(currencyPath)
 	currencyFile := filepath.Join(currencyPath, "currency.go")
@@ -163,10 +162,10 @@ func main() {
 		panic(err)
 	}
 
-	//create a mapping of a locale to which tag to use for plurals. this ensures that all the locales, not just the
-	//ones in the CLDR with plural rules, have them populated.
-	//without doing this, locales like en_US or fr_CA wouldn't have plural rules, since they are only attached to
-	//higher level locales like en and fr
+	// create a mapping of a locale to which tag to use for plurals. this ensures that all the locales, not just the
+	// ones in the CLDR with plural rules, have them populated.
+	// without doing this, locales like en_US or fr_CA wouldn't have plural rules, since they are only attached to
+	// higher level locales like en and fr
 	plFuncs := make(map[string]string, len(localeData.Locales))
 	for loc := range localeData.Locales {
 		plFuncs[loc] = pluralLocale(loc, pluralLocales)
@@ -191,15 +190,15 @@ func main() {
 	}
 
 	plLocalesFiles := filepath.Join(resourcesDir, "gen_plural_locales.go")
-	//we don't need the rest of allData, but it's convenient...
+	// we don't need the rest of allData, but it's convenient...
 	err = executeAndWrite(filepath.Join(templatesDir, "plural_locales.tpl"), allData, plLocalesFiles)
 	if err != nil {
 		panic(err)
 	}
 }
 
-//upperIdentifier takes a string and does some basic things to make it a valid identifier. it doesn't do a
-//check for reserved words, invalid characters, etc. The entire string is uppercased.
+// upperIdentifier takes a string and does some basic things to make it a valid identifier. it doesn't do a
+// check for reserved words, invalid characters, etc. The entire string is uppercased.
 func upperIdentifier(s string) string {
 	upper := strings.ToUpper(s)
 	var first rune

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/imdario/mergo"
+	"dario.cat/mergo"
 	"golang.org/x/text/language"
 	"golang.org/x/text/unicode/cldr"
 
@@ -29,7 +29,7 @@ type languages map[string]string
 type territories map[string]string
 
 func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
-	//size based on a check on 2020-07-25 of how many entries they ended up with: 464 numbers, 358 calendars
+	// size based on a check on 2020-07-25 of how many entries they ended up with: 464 numbers, 358 calendars
 	localeData := localeData{
 		Locales:        make(map[string]bool, len(unicodeCLDR.Locales())),
 		Numbers:        make(numbers, 500),
@@ -39,7 +39,7 @@ func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
 		DisplayPattern: make(map[string]i18n.LocaleDisplayPattern, 500),
 	}
 
-	//quick & easy way to know if a locale exists
+	// quick & easy way to know if a locale exists
 	for _, loc := range unicodeCLDR.Locales() {
 		localeData.Locales[loc] = true
 	}
@@ -52,9 +52,9 @@ func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
 	return &localeData
 }
 
-//getCLDRData turns CLDR data into our Number and Calendar types, recursively merging data
-//so that information from parent locales is inherited. This isn't perfect and doesn't obey all the rules described in
-//http://unicode.org/reports/tr35/#Common_Elements, but it should do a pretty good job most of the time.
+// getCLDRData turns CLDR data into our Number and Calendar types, recursively merging data
+// so that information from parent locales is inherited. This isn't perfect and doesn't obey all the rules described in
+// http://unicode.org/reports/tr35/#Common_Elements, but it should do a pretty good job most of the time.
 func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string) (number i18n.Number,
 	calendar i18n.Calendar, languages languages, territories territories, pattern i18n.LocaleDisplayPattern) {
 	ldml := unicodeCLDR.RawLDML(loc)
@@ -70,17 +70,17 @@ func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string)
 		return
 	}
 
-	//TODO can we check if parentLoc != loc and only do this in that case?
+	// TODO can we check if parentLoc != loc and only do this in that case?
 	parentNumber, parentCalendar, parentLanguages, parentTerritories, parentPattern :=
 		getCLDRData(allLocales, unicodeCLDR, parentLoc)
 
-	//merge them
+	// merge them
 	err := mergo.Merge(&number, parentNumber)
 	if err != nil {
 		fmt.Println("Number merge error", err)
 	}
 
-	//handle the currency map of structs (mergo doesn't do this)
+	// handle the currency map of structs (mergo doesn't do this)
 	for curName, parentCurrency := range parentNumber.Currencies {
 		mergedCurrency := number.Currencies[curName]
 		if mergedCurrency.DisplayName == "" {
@@ -97,7 +97,7 @@ func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string)
 		fmt.Println("Calendar merge error", err)
 	}
 
-	//merge langs and territories
+	// merge langs and territories
 	for k, v := range parentLanguages {
 		if _, ok := languages[k]; !ok {
 			languages[k] = v
@@ -118,8 +118,8 @@ func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string)
 	return
 }
 
-//findParentLocale walks up the inheritance chain and returns the next parent locale that's present in allLocales
-//if loc is root, the isRoot bool will be true, and parentLoc will be the empty string "".
+// findParentLocale walks up the inheritance chain and returns the next parent locale that's present in allLocales
+// if loc is root, the isRoot bool will be true, and parentLoc will be the empty string "".
 func findParentLocale(loc string, allLocales map[string]bool) (parentLoc string, isRoot bool) {
 	tag := language.Make(loc)
 	if tag.IsRoot() {
@@ -278,7 +278,6 @@ func processCalendarTimeFormats(ldmlCar *cldr.Calendar, calendar *i18n.Calendar)
 			}
 		}
 	}
-
 }
 
 func processCalendarMonths(ldmlCar *cldr.Calendar, calendar *i18n.Calendar) {
@@ -340,7 +339,6 @@ func processCalendarDays(ldmlCar *cldr.Calendar, calendar *i18n.Calendar) {
 				var i18nDay i18n.CalendarDayFormatNameValue
 				for _, d := range days.Day {
 					setDayName(d.Type, d.Data(), &i18nDay)
-
 				}
 				switch days.Type {
 				case typeAbbreviated:

@@ -1,10 +1,24 @@
 linters:
   enable:
-    - golint
-    - gocyclo
+    - bodyclose
+    - cyclop
+    - durationcheck
+    - errorlint
+    - copyloopvar
+    - gocritic
+    - gosec
+    - nolintlint
+    - prealloc
+    - rowserrcheck
+    - sqlclosecheck
+    - thelper
+    - unconvert
+    - whitespace
+    - sloglint
+    - containedctx
 linters-settings:
-  gocyclo:
-    min-complexity: 18
-issues:
-  include:
-    - EXC0002 # disable excluding of issues about comments from golint
+  cyclop:
+    max-complexity: 18
+#issues:
+#  include:
+#    - EXC0002 # disable excluding of issues about comments from golint
