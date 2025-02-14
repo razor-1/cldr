@@ -1,6 +1,6 @@
 # razor-1/CLDR
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/razor-1/cldr/test.yml?branch=master)](https://github.com/razor-1/cldr/actions?query=workflow%3ABuild)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/razor-1/cldr/build.yml?branch=master)](https://github.com/razor-1/cldr/actions?query=workflow%3ABuild)
 [![Go Report Card](https://goreportcard.com/badge/github.com/razor-1/cldr?style=flat-square)](https://goreportcard.com/report/github.com/razor-1/cldr)
 ![Go Version](https://img.shields.io/badge/go%20version-%3E=1.23-61CFDD.svg?style=flat-square)
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/razor-1/cldr)](https://pkg.go.dev/github.com/razor-1/cldr)
