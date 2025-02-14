@@ -171,6 +171,7 @@ func getNumberSymbols(ldmlNumbers *cldr.Numbers) (symbol i18n.Symbols) {
 	return
 }
 
+//nolint:cyclop // need some complexity here
 func processNumbers(ldmlNumbers *cldr.Numbers) (number i18n.Number) {
 	if ldmlNumbers == nil {
 		return
