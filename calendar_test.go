@@ -28,14 +28,14 @@ func TestFormatDateTime(t *testing.T) {
 		{fmtFunc: en.Calendar.FmtDateLong, format: "January 2, 2006"},
 		{fmtFunc: en.Calendar.FmtDateMedium, format: "Jan 2, 2006"},
 		{fmtFunc: en.Calendar.FmtDateShort, format: "1/2/06"},
-		{fmtFunc: en.Calendar.FmtTimeFull, format: "3:04:05 PM GMT+00:00"},
-		{fmtFunc: en.Calendar.FmtTimeLong, format: "3:04:05 PM GMT+00:00"},
-		{fmtFunc: en.Calendar.FmtTimeMedium, format: "3:04:05 PM"},
-		{fmtFunc: en.Calendar.FmtTimeShort, format: "3:04 PM"},
-		{fmtFunc: en.Calendar.FmtDateTimeFull, format: "Monday, January 2, 2006 at 3:04:05 PM GMT+00:00"},
-		{fmtFunc: en.Calendar.FmtDateTimeLong, format: "January 2, 2006 at 3:04:05 PM GMT+00:00"},
-		{fmtFunc: en.Calendar.FmtDateTimeMedium, format: "Jan 2, 2006, 3:04:05 PM"},
-		{fmtFunc: en.Calendar.FmtDateTimeShort, format: "1/2/06, 3:04 PM"},
+		{fmtFunc: en.Calendar.FmtTimeFull, format: "3:04:05 PM GMT+00:00"},
+		{fmtFunc: en.Calendar.FmtTimeLong, format: "3:04:05 PM GMT+00:00"},
+		{fmtFunc: en.Calendar.FmtTimeMedium, format: "3:04:05 PM"},
+		{fmtFunc: en.Calendar.FmtTimeShort, format: "3:04 PM"},
+		{fmtFunc: en.Calendar.FmtDateTimeFull, format: "Monday, January 2, 2006, 3:04:05 PM GMT+00:00"},
+		{fmtFunc: en.Calendar.FmtDateTimeLong, format: "January 2, 2006, 3:04:05 PM GMT+00:00"},
+		{fmtFunc: en.Calendar.FmtDateTimeMedium, format: "Jan 2, 2006, 3:04:05 PM"},
+		{fmtFunc: en.Calendar.FmtDateTimeShort, format: "1/2/06, 3:04 PM"},
 	}
 
 	for _, test := range tests {

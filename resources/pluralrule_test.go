@@ -40,11 +40,11 @@ func runTests(t *testing.T, tag language.Tag, tests []pluralFormTest) {
 
 func appendIntegerTests(tests []pluralFormTest, form plural.Form, examples []string) []pluralFormTest {
 	for _, ex := range expandExamples(examples) {
+		tests = append(tests, pluralFormTest{ex, form})
 		i, err := strconv.ParseInt(ex, 10, 64)
-		if err != nil {
-			panic(err)
+		if err == nil {
+			tests = append(tests, pluralFormTest{i, form})
 		}
-		tests = append(tests, pluralFormTest{ex, form}, pluralFormTest{i, form})
 	}
 	return tests
 }

@@ -72,7 +72,7 @@ func main() {
 		panic(err)
 	}
 
-	localeData := processCLDR(unicodeCLDR)
+	cldrLocaleData := processCLDR(unicodeCLDR)
 
 	path := filepath.Join(resourcesDir, internalDir, localesDir)
 	makePath(path)
@@ -80,7 +80,7 @@ func main() {
 	pluralLocales := pluralRules(unicodeCLDR.Supplemental())
 	// some locales seem to show up in plural rules but not in common/main...keep track of everything in allLocales
 	for loc := range pluralLocales {
-		localeData.Locales[loc] = true
+		cldrLocaleData.Locales[loc] = true
 	}
 
 	// aggregate stores everything we've seen across all locales
@@ -93,10 +93,10 @@ func main() {
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(len(localeData.Numbers))
+	wg.Add(len(cldrLocaleData.Numbers))
 	sem := make(chan bool, 20)
-	for locale, number := range localeData.Numbers {
-		localeData.Locales[locale] = true
+	for locale, number := range cldrLocaleData.Numbers {
+		cldrLocaleData.Locales[locale] = true
 		sem <- true
 		go func(locale string, number i18n.Number) {
 			defer func() {
@@ -110,11 +110,11 @@ func main() {
 				CLDRPackage:          cldrPackage,
 				Symbols:              number.Symbols,
 				NumberFormats:        number.Formats,
-				Calendar:             localeData.Calendars[locale],
+				Calendar:             cldrLocaleData.Calendars[locale],
 				Currencies:           number.Currencies,
-				Languages:            localeData.Languages[locale],
-				Territories:          localeData.Territories[locale],
-				LocaleDisplayPattern: localeData.DisplayPattern[locale],
+				Languages:            cldrLocaleData.Languages[locale],
+				Territories:          cldrLocaleData.Territories[locale],
+				LocaleDisplayPattern: cldrLocaleData.DisplayPattern[locale],
 			}
 			err = executeAndWrite(filepath.Join(templatesDir, "locales.tpl"), tplData, localeFile)
 			if err != nil {
@@ -166,8 +166,8 @@ func main() {
 	// ones in the CLDR with plural rules, have them populated.
 	// without doing this, locales like en_US or fr_CA wouldn't have plural rules, since they are only attached to
 	// higher level locales like en and fr
-	plFuncs := make(map[string]string, len(localeData.Locales))
-	for loc := range localeData.Locales {
+	plFuncs := make(map[string]string, len(cldrLocaleData.Locales))
+	for loc := range cldrLocaleData.Locales {
 		plFuncs[loc] = pluralLocale(loc, pluralLocales)
 	}
 
@@ -179,8 +179,8 @@ func main() {
 	}
 	allData := allTemplateData{
 		CLDRPackage:      cldrPackage,
-		Numbers:          localeData.Numbers,
-		Tags:             localeData.Locales,
+		Numbers:          cldrLocaleData.Numbers,
+		Tags:             cldrLocaleData.Locales,
 		PluralLocaleTags: plFuncs,
 	}
 	allFile := filepath.Join(resourcesDir, "gen_locales.go")

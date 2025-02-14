@@ -30,7 +30,7 @@ type territories map[string]string
 
 func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
 	// size based on a check on 2020-07-25 of how many entries they ended up with: 464 numbers, 358 calendars
-	localeData := localeData{
+	lData := localeData{
 		Locales:        make(map[string]bool, len(unicodeCLDR.Locales())),
 		Numbers:        make(numbers, 500),
 		Calendars:      make(calendars, 400),
@@ -41,15 +41,15 @@ func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
 
 	// quick & easy way to know if a locale exists
 	for _, loc := range unicodeCLDR.Locales() {
-		localeData.Locales[loc] = true
+		lData.Locales[loc] = true
 	}
 
-	for loc := range localeData.Locales {
-		localeData.Numbers[loc], localeData.Calendars[loc], localeData.Languages[loc],
-			localeData.Territories[loc], localeData.DisplayPattern[loc] = getCLDRData(localeData.Locales, unicodeCLDR, loc)
+	for loc := range lData.Locales {
+		lData.Numbers[loc], lData.Calendars[loc], lData.Languages[loc],
+			lData.Territories[loc], lData.DisplayPattern[loc] = getCLDRData(lData.Locales, unicodeCLDR, loc)
 	}
 
-	return &localeData
+	return &lData
 }
 
 // getCLDRData turns CLDR data into our Number and Calendar types, recursively merging data
@@ -139,36 +139,68 @@ func findParentLocale(loc string, allLocales map[string]bool) (parentLoc string,
 }
 
 func getNumberSymbols(ldmlNumbers *cldr.Numbers) (symbol i18n.Symbols) {
-	if len(ldmlNumbers.Symbols) > 0 {
-		ldmlSymbol := ldmlNumbers.Symbols[0]
-		if len(ldmlSymbol.Decimal) > 0 {
-			symbol.Decimal = ldmlSymbol.Decimal[0].Data()
+	if len(ldmlNumbers.Symbols) == 0 {
+		return
+	}
+	symbolIndex := 0
+	// try to find the latin number system entry
+	for i, ns := range ldmlNumbers.Symbols {
+		if ns.NumberSystem == "latn" {
+			symbolIndex = i
+			break
 		}
-		if len(ldmlSymbol.Group) > 0 {
-			symbol.Group = ldmlSymbol.Group[0].Data()
-		}
-		if len(ldmlSymbol.MinusSign) > 0 {
-			symbol.Negative = ldmlSymbol.MinusSign[0].Data()
-		}
-		if len(ldmlSymbol.PercentSign) > 0 {
-			symbol.Percent = ldmlSymbol.PercentSign[0].Data()
-		}
-		if len(ldmlSymbol.PerMille) > 0 {
-			symbol.PerMille = ldmlSymbol.PerMille[0].Data()
-		}
+	}
+
+	ldmlSymbol := ldmlNumbers.Symbols[symbolIndex]
+	if len(ldmlSymbol.Decimal) > 0 {
+		symbol.Decimal = ldmlSymbol.Decimal[0].Data()
+	}
+	if len(ldmlSymbol.Group) > 0 {
+		symbol.Group = ldmlSymbol.Group[0].Data()
+	}
+	if len(ldmlSymbol.MinusSign) > 0 {
+		symbol.Negative = ldmlSymbol.MinusSign[0].Data()
+	}
+	if len(ldmlSymbol.PercentSign) > 0 {
+		symbol.Percent = ldmlSymbol.PercentSign[0].Data()
+	}
+	if len(ldmlSymbol.PerMille) > 0 {
+		symbol.PerMille = ldmlSymbol.PerMille[0].Data()
 	}
 
 	return
 }
 
+//nolint:cyclop // need some complexity here
 func processNumbers(ldmlNumbers *cldr.Numbers) (number i18n.Number) {
 	if ldmlNumbers == nil {
 		return
 	}
 	number.Symbols = getNumberSymbols(ldmlNumbers)
 
-	if len(ldmlNumbers.DecimalFormats) > 0 && len(ldmlNumbers.DecimalFormats[0].DecimalFormatLength) > 0 {
-		number.Formats.Decimal = ldmlNumbers.DecimalFormats[0].DecimalFormatLength[0].DecimalFormat[0].Pattern[0].Data()
+	if len(ldmlNumbers.DecimalFormats) > 0 {
+		formatIdx := 0
+		for i, df := range ldmlNumbers.DecimalFormats {
+			if df.NumberSystem == "latn" {
+				formatIdx = i
+				break
+			}
+		}
+		formatLengthIdx := -1
+		for i, fl := range ldmlNumbers.DecimalFormats[formatIdx].DecimalFormatLength {
+			if fl.Type == "" {
+				formatLengthIdx = i
+				break
+			}
+		}
+
+		if formatLengthIdx >= 0 {
+			// we only want the decimalFormatLength that doesn't have a type = the long and short ones are not in scope now
+			decimalFormatLength := ldmlNumbers.DecimalFormats[formatIdx].DecimalFormatLength[formatLengthIdx]
+			if len(decimalFormatLength.DecimalFormat) > 0 && len(decimalFormatLength.DecimalFormat[0].Pattern) > 0 {
+				number.Formats.Decimal = decimalFormatLength.DecimalFormat[0].Pattern[0].Data()
+			}
+		}
 	}
 	if len(ldmlNumbers.CurrencyFormats) > 0 && len(ldmlNumbers.CurrencyFormats[0].CurrencyFormatLength) > 0 {
 		for _, currencyFormat := range ldmlNumbers.CurrencyFormats[0].CurrencyFormatLength[0].CurrencyFormat {

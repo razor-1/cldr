@@ -74,7 +74,7 @@ func (pr *PluralRule) DecimalExamples() []string {
 	return decimal
 }
 
-var relationRegexp = regexp.MustCompile(`([niftvw])(?:\s*%\s*([0-9]+))?\s*(!=|=)(.*)`)
+var relationRegexp = regexp.MustCompile(`([nivwftce])(?:\s*%\s*([0-9]+))?\s*(!=|=)(.*)`)
 
 // GoCondition converts the XML condition to valid Go code.
 func (pr *PluralRule) GoCondition() string {
@@ -89,6 +89,10 @@ func (pr *PluralRule) GoCondition() string {
 			lvar, lmod, op, rhs := titleCaser.String(parts[1]), parts[2], parts[3], strings.TrimSpace(parts[4])
 			if op == "=" {
 				op = "=="
+			}
+			// e is the deprecated form of c, but appears in the rules as of CLDR 46.
+			if lvar == "E" {
+				lvar = "C"
 			}
 			lvar = "ops." + lvar
 			var rhor []string

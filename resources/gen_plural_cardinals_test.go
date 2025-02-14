@@ -15,7 +15,7 @@ func TestCardinal_0(t *testing.T) {
 	tests = appendDecimalTests(tests, plural.Other, []string{"0.0~1.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
 
 	tags := []language.Tag{
-		tag_bm, tag_bo, tag_dz, tag_id, tag_ig, tag_ii, tag_in, tag_ja, tag_jbo, tag_jv, tag_jw, tag_kde, tag_kea, tag_km, tag_ko, tag_lkt, tag_lo, tag_ms, tag_my, tag_nqo, tag_osa, tag_root, tag_sah, tag_ses, tag_sg, tag_su, tag_th, tag_to, tag_vi, tag_wo, tag_yo, tag_yue, tag_zh,
+		tag_bm, tag_bo, tag_dz, tag_hnj, tag_id, tag_ig, tag_ii, tag_in, tag_ja, tag_jbo, tag_jv, tag_jw, tag_kde, tag_kea, tag_km, tag_ko, tag_lkt, tag_lo, tag_ms, tag_my, tag_nqo, tag_osa, tag_root, tag_sah, tag_ses, tag_sg, tag_su, tag_th, tag_to, tag_tpi, tag_vi, tag_wo, tag_yo, tag_yue, tag_zh,
 	}
 	for _, tag := range tags {
 		runTests(t, tag, tests)
@@ -32,7 +32,7 @@ func TestCardinal_1(t *testing.T) {
 	tests = appendDecimalTests(tests, plural.Other, []string{"1.1~2.6", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
 
 	tags := []language.Tag{
-		tag_am, tag_as, tag_bn, tag_fa, tag_gu, tag_hi, tag_kn, tag_pcm, tag_zu,
+		tag_am, tag_as, tag_bn, tag_doi, tag_fa, tag_gu, tag_hi, tag_kn, tag_pcm, tag_zu,
 	}
 	for _, tag := range tags {
 		runTests(t, tag, tests)
@@ -49,7 +49,7 @@ func TestCardinal_2(t *testing.T) {
 	tests = appendDecimalTests(tests, plural.Other, []string{"2.0~3.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
 
 	tags := []language.Tag{
-		tag_ff, tag_fr, tag_hy, tag_kab,
+		tag_ff, tag_hy, tag_kab,
 	}
 	for _, tag := range tags {
 		runTests(t, tag, tests)
@@ -59,14 +59,13 @@ func TestCardinal_2(t *testing.T) {
 func TestCardinal_3(t *testing.T) {
 	var tests []pluralFormTest
 
-	tests = appendIntegerTests(tests, plural.One, []string{"0", "1"})
-	tests = appendDecimalTests(tests, plural.One, []string{"0.0~1.5"})
+	tests = appendIntegerTests(tests, plural.One, []string{"1"})
 
-	tests = appendIntegerTests(tests, plural.Other, []string{"2~17", "100", "1000", "10000", "100000", "1000000"})
-	tests = appendDecimalTests(tests, plural.Other, []string{"2.0~3.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
+	tests = appendIntegerTests(tests, plural.Other, []string{"0", "2~16", "100", "1000", "10000", "100000", "1000000"})
+	tests = appendDecimalTests(tests, plural.Other, []string{"0.0~1.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
 
 	tags := []language.Tag{
-		tag_pt,
+		tag_ast, tag_de, tag_en, tag_et, tag_fi, tag_fy, tag_gl, tag_ia, tag_io, tag_ji, tag_lij, tag_nl, tag_sc, tag_sv, tag_sw, tag_ur, tag_yi,
 	}
 	for _, tag := range tags {
 		runTests(t, tag, tests)
@@ -74,22 +73,6 @@ func TestCardinal_3(t *testing.T) {
 }
 
 func TestCardinal_4(t *testing.T) {
-	var tests []pluralFormTest
-
-	tests = appendIntegerTests(tests, plural.One, []string{"1"})
-
-	tests = appendIntegerTests(tests, plural.Other, []string{"0", "2~16", "100", "1000", "10000", "100000", "1000000"})
-	tests = appendDecimalTests(tests, plural.Other, []string{"0.0~1.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
-
-	tags := []language.Tag{
-		tag_ast, tag_ca, tag_de, tag_en, tag_et, tag_fi, tag_fy, tag_gl, tag_ia, tag_io, tag_it, tag_ji, tag_nl, tag_pt_PT, tag_sc, tag_scn, tag_sv, tag_sw, tag_ur, tag_yi,
-	}
-	for _, tag := range tags {
-		runTests(t, tag, tests)
-	}
-}
-
-func TestCardinal_5(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"0", "1"})
@@ -106,7 +89,7 @@ func TestCardinal_5(t *testing.T) {
 	}
 }
 
-func TestCardinal_6(t *testing.T) {
+func TestCardinal_5(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"0", "1"})
@@ -116,14 +99,14 @@ func TestCardinal_6(t *testing.T) {
 	tests = appendDecimalTests(tests, plural.Other, []string{"0.1~0.9", "1.1~1.7", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
 
 	tags := []language.Tag{
-		tag_ak, tag_bho, tag_guw, tag_ln, tag_mg, tag_nso, tag_pa, tag_ti, tag_wa,
+		tag_ak, tag_bho, tag_csw, tag_guw, tag_ln, tag_mg, tag_nso, tag_pa, tag_ti, tag_wa,
 	}
 	for _, tag := range tags {
 		runTests(t, tag, tests)
 	}
 }
 
-func TestCardinal_7(t *testing.T) {
+func TestCardinal_6(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"0", "1", "11~24"})
@@ -140,7 +123,7 @@ func TestCardinal_7(t *testing.T) {
 	}
 }
 
-func TestCardinal_8(t *testing.T) {
+func TestCardinal_7(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1"})
@@ -150,14 +133,14 @@ func TestCardinal_8(t *testing.T) {
 	tests = appendDecimalTests(tests, plural.Other, []string{"0.0~0.9", "1.1~1.6", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
 
 	tags := []language.Tag{
-		tag_af, tag_an, tag_asa, tag_az, tag_bem, tag_bez, tag_bg, tag_brx, tag_ce, tag_cgg, tag_chr, tag_ckb, tag_dv, tag_ee, tag_el, tag_eo, tag_es, tag_eu, tag_fo, tag_fur, tag_gsw, tag_ha, tag_haw, tag_hu, tag_jgo, tag_jmc, tag_ka, tag_kaj, tag_kcg, tag_kk, tag_kkj, tag_kl, tag_ks, tag_ksb, tag_ku, tag_ky, tag_lb, tag_lg, tag_mas, tag_mgo, tag_ml, tag_mn, tag_mr, tag_nah, tag_nb, tag_nd, tag_ne, tag_nn, tag_nnh, tag_no, tag_nr, tag_ny, tag_nyn, tag_om, tag_or, tag_os, tag_pap, tag_ps, tag_rm, tag_rof, tag_rwk, tag_saq, tag_sd, tag_sdh, tag_seh, tag_sn, tag_so, tag_sq, tag_ss, tag_ssy, tag_st, tag_syr, tag_ta, tag_te, tag_teo, tag_tig, tag_tk, tag_tn, tag_tr, tag_ts, tag_ug, tag_uz, tag_ve, tag_vo, tag_vun, tag_wae, tag_xh, tag_xog,
+		tag_af, tag_an, tag_asa, tag_az, tag_bal, tag_bem, tag_bez, tag_bg, tag_brx, tag_ce, tag_cgg, tag_chr, tag_ckb, tag_dv, tag_ee, tag_el, tag_eo, tag_eu, tag_fo, tag_fur, tag_gsw, tag_ha, tag_haw, tag_hu, tag_jgo, tag_jmc, tag_ka, tag_kaj, tag_kcg, tag_kk, tag_kkj, tag_kl, tag_ks, tag_ksb, tag_ku, tag_ky, tag_lb, tag_lg, tag_mas, tag_mgo, tag_ml, tag_mn, tag_mr, tag_nah, tag_nb, tag_nd, tag_ne, tag_nn, tag_nnh, tag_no, tag_nr, tag_ny, tag_nyn, tag_om, tag_or, tag_os, tag_pap, tag_ps, tag_rm, tag_rof, tag_rwk, tag_saq, tag_sd, tag_sdh, tag_seh, tag_sn, tag_so, tag_sq, tag_ss, tag_ssy, tag_st, tag_syr, tag_ta, tag_te, tag_teo, tag_tig, tag_tk, tag_tn, tag_tr, tag_ts, tag_ug, tag_uz, tag_ve, tag_vo, tag_vun, tag_wae, tag_xh, tag_xog,
 	}
 	for _, tag := range tags {
 		runTests(t, tag, tests)
 	}
 }
 
-func TestCardinal_9(t *testing.T) {
+func TestCardinal_8(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1"})
@@ -174,14 +157,14 @@ func TestCardinal_9(t *testing.T) {
 	}
 }
 
-func TestCardinal_10(t *testing.T) {
+func TestCardinal_9(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "21", "31", "41", "51", "61", "71", "81", "101", "1001"})
-	tests = appendDecimalTests(tests, plural.One, []string{"0.1~1.6", "10.1", "100.1", "1000.1"})
+	tests = appendDecimalTests(tests, plural.One, []string{"0.1", "1.0", "1.1", "2.1", "3.1", "4.1", "5.1", "6.1", "7.1", "10.1", "100.1", "1000.1"})
 
 	tests = appendIntegerTests(tests, plural.Other, []string{"0", "2~16", "100", "1000", "10000", "100000", "1000000"})
-	tests = appendDecimalTests(tests, plural.Other, []string{"0.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0", "8.0", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
+	tests = appendDecimalTests(tests, plural.Other, []string{"0.0", "0.2~0.9", "1.2~1.8", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
 
 	tags := []language.Tag{
 		tag_is,
@@ -191,7 +174,7 @@ func TestCardinal_10(t *testing.T) {
 	}
 }
 
-func TestCardinal_11(t *testing.T) {
+func TestCardinal_10(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "21", "31", "41", "51", "61", "71", "81", "101", "1001"})
@@ -208,7 +191,7 @@ func TestCardinal_11(t *testing.T) {
 	}
 }
 
-func TestCardinal_12(t *testing.T) {
+func TestCardinal_11(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"0~3", "5", "7", "8", "10~13", "15", "17", "18", "20", "21", "100", "1000", "10000", "100000", "1000000"})
@@ -225,7 +208,7 @@ func TestCardinal_12(t *testing.T) {
 	}
 }
 
-func TestCardinal_13(t *testing.T) {
+func TestCardinal_12(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.Zero, []string{"0", "10~20", "30", "40", "50", "60", "100", "1000", "10000", "100000", "1000000"})
@@ -245,7 +228,7 @@ func TestCardinal_13(t *testing.T) {
 	}
 }
 
-func TestCardinal_14(t *testing.T) {
+func TestCardinal_13(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.Zero, []string{"0"})
@@ -259,6 +242,26 @@ func TestCardinal_14(t *testing.T) {
 
 	tags := []language.Tag{
 		tag_lag,
+	}
+	for _, tag := range tags {
+		runTests(t, tag, tests)
+	}
+}
+
+func TestCardinal_14(t *testing.T) {
+	var tests []pluralFormTest
+
+	tests = appendIntegerTests(tests, plural.Zero, []string{"0"})
+	tests = appendDecimalTests(tests, plural.Zero, []string{"0.0", "0.00", "0.000", "0.0000"})
+
+	tests = appendIntegerTests(tests, plural.One, []string{"1"})
+	tests = appendDecimalTests(tests, plural.One, []string{"1.0", "1.00", "1.000", "1.0000"})
+
+	tests = appendIntegerTests(tests, plural.Other, []string{"2~17", "100", "1000", "10000", "100000", "1000000"})
+	tests = appendDecimalTests(tests, plural.Other, []string{"0.1~0.9", "1.1~1.7", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
+
+	tags := []language.Tag{
+		tag_blo,
 	}
 	for _, tag := range tags {
 		runTests(t, tag, tests)
@@ -289,6 +292,25 @@ func TestCardinal_16(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1"})
+	tests = appendDecimalTests(tests, plural.One, []string{"0.0~0.9", "0.00~0.05"})
+
+	tests = appendIntegerTests(tests, plural.Two, []string{"2"})
+
+	tests = appendIntegerTests(tests, plural.Other, []string{"0", "3~17", "100", "1000", "10000", "100000", "1000000"})
+	tests = appendDecimalTests(tests, plural.Other, []string{"1.0~2.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
+
+	tags := []language.Tag{
+		tag_he, tag_iw,
+	}
+	for _, tag := range tags {
+		runTests(t, tag, tests)
+	}
+}
+
+func TestCardinal_17(t *testing.T) {
+	var tests []pluralFormTest
+
+	tests = appendIntegerTests(tests, plural.One, []string{"1"})
 	tests = appendDecimalTests(tests, plural.One, []string{"1.0", "1.00", "1.000", "1.0000"})
 
 	tests = appendIntegerTests(tests, plural.Two, []string{"2"})
@@ -305,7 +327,7 @@ func TestCardinal_16(t *testing.T) {
 	}
 }
 
-func TestCardinal_17(t *testing.T) {
+func TestCardinal_18(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"0", "1"})
@@ -325,12 +347,12 @@ func TestCardinal_17(t *testing.T) {
 	}
 }
 
-func TestCardinal_18(t *testing.T) {
+func TestCardinal_19(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1"})
 
-	tests = appendIntegerTests(tests, plural.Few, []string{"0", "2~16", "102", "1002"})
+	tests = appendIntegerTests(tests, plural.Few, []string{"0", "2~16", "101", "1001"})
 	tests = appendDecimalTests(tests, plural.Few, []string{"0.0~1.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
 
 	tests = appendIntegerTests(tests, plural.Other, []string{"20~35", "100", "1000", "10000", "100000", "1000000"})
@@ -343,7 +365,7 @@ func TestCardinal_18(t *testing.T) {
 	}
 }
 
-func TestCardinal_19(t *testing.T) {
+func TestCardinal_20(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "21", "31", "41", "51", "61", "71", "81", "101", "1001"})
@@ -363,7 +385,86 @@ func TestCardinal_19(t *testing.T) {
 	}
 }
 
-func TestCardinal_20(t *testing.T) {
+func TestCardinal_21(t *testing.T) {
+	var tests []pluralFormTest
+
+	tests = appendIntegerTests(tests, plural.One, []string{"0", "1"})
+	tests = appendDecimalTests(tests, plural.One, []string{"0.0~1.5"})
+
+	tests = appendIntegerTests(tests, plural.Many, []string{"1000000", "1c6", "2c6", "3c6", "4c6", "5c6", "6c6"})
+	tests = appendDecimalTests(tests, plural.Many, []string{"1.0000001c6", "1.1c6", "2.0000001c6", "2.1c6", "3.0000001c6", "3.1c6"})
+
+	tests = appendIntegerTests(tests, plural.Other, []string{"2~17", "100", "1000", "10000", "100000", "1c3", "2c3", "3c3", "4c3", "5c3", "6c3"})
+	tests = appendDecimalTests(tests, plural.Other, []string{"2.0~3.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0", "1.0001c3", "1.1c3", "2.0001c3", "2.1c3", "3.0001c3", "3.1c3"})
+
+	tags := []language.Tag{
+		tag_fr,
+	}
+	for _, tag := range tags {
+		runTests(t, tag, tests)
+	}
+}
+
+func TestCardinal_22(t *testing.T) {
+	var tests []pluralFormTest
+
+	tests = appendIntegerTests(tests, plural.One, []string{"0", "1"})
+	tests = appendDecimalTests(tests, plural.One, []string{"0.0~1.5"})
+
+	tests = appendIntegerTests(tests, plural.Many, []string{"1000000", "1c6", "2c6", "3c6", "4c6", "5c6", "6c6"})
+	tests = appendDecimalTests(tests, plural.Many, []string{"1.0000001c6", "1.1c6", "2.0000001c6", "2.1c6", "3.0000001c6", "3.1c6"})
+
+	tests = appendIntegerTests(tests, plural.Other, []string{"2~17", "100", "1000", "10000", "100000", "1c3", "2c3", "3c3", "4c3", "5c3", "6c3"})
+	tests = appendDecimalTests(tests, plural.Other, []string{"2.0~3.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0", "1.0001c3", "1.1c3", "2.0001c3", "2.1c3", "3.0001c3", "3.1c3"})
+
+	tags := []language.Tag{
+		tag_pt,
+	}
+	for _, tag := range tags {
+		runTests(t, tag, tests)
+	}
+}
+
+func TestCardinal_23(t *testing.T) {
+	var tests []pluralFormTest
+
+	tests = appendIntegerTests(tests, plural.One, []string{"1"})
+
+	tests = appendIntegerTests(tests, plural.Many, []string{"1000000", "1c6", "2c6", "3c6", "4c6", "5c6", "6c6"})
+	tests = appendDecimalTests(tests, plural.Many, []string{"1.0000001c6", "1.1c6", "2.0000001c6", "2.1c6", "3.0000001c6", "3.1c6"})
+
+	tests = appendIntegerTests(tests, plural.Other, []string{"0", "2~16", "100", "1000", "10000", "100000", "1c3", "2c3", "3c3", "4c3", "5c3", "6c3"})
+	tests = appendDecimalTests(tests, plural.Other, []string{"0.0~1.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0", "1.0001c3", "1.1c3", "2.0001c3", "2.1c3", "3.0001c3", "3.1c3"})
+
+	tags := []language.Tag{
+		tag_ca, tag_it, tag_lld, tag_pt_PT, tag_scn, tag_vec,
+	}
+	for _, tag := range tags {
+		runTests(t, tag, tests)
+	}
+}
+
+func TestCardinal_24(t *testing.T) {
+	var tests []pluralFormTest
+
+	tests = appendIntegerTests(tests, plural.One, []string{"1"})
+	tests = appendDecimalTests(tests, plural.One, []string{"1.0", "1.00", "1.000", "1.0000"})
+
+	tests = appendIntegerTests(tests, plural.Many, []string{"1000000", "1c6", "2c6", "3c6", "4c6", "5c6", "6c6"})
+	tests = appendDecimalTests(tests, plural.Many, []string{"1.0000001c6", "1.1c6", "2.0000001c6", "2.1c6", "3.0000001c6", "3.1c6"})
+
+	tests = appendIntegerTests(tests, plural.Other, []string{"0", "2~16", "100", "1000", "10000", "100000", "1c3", "2c3", "3c3", "4c3", "5c3", "6c3"})
+	tests = appendDecimalTests(tests, plural.Other, []string{"0.0~0.9", "1.1~1.6", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0", "1.0001c3", "1.1c3", "2.0001c3", "2.1c3", "3.0001c3", "3.1c3"})
+
+	tags := []language.Tag{
+		tag_es,
+	}
+	for _, tag := range tags {
+		runTests(t, tag, tests)
+	}
+}
+
+func TestCardinal_25(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "11"})
@@ -386,7 +487,7 @@ func TestCardinal_20(t *testing.T) {
 	}
 }
 
-func TestCardinal_21(t *testing.T) {
+func TestCardinal_26(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "101", "201", "301", "401", "501", "601", "701", "1001"})
@@ -406,7 +507,7 @@ func TestCardinal_21(t *testing.T) {
 	}
 }
 
-func TestCardinal_22(t *testing.T) {
+func TestCardinal_27(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "101", "201", "301", "401", "501", "601", "701", "1001"})
@@ -429,27 +530,7 @@ func TestCardinal_22(t *testing.T) {
 	}
 }
 
-func TestCardinal_23(t *testing.T) {
-	var tests []pluralFormTest
-
-	tests = appendIntegerTests(tests, plural.One, []string{"1"})
-
-	tests = appendIntegerTests(tests, plural.Two, []string{"2"})
-
-	tests = appendIntegerTests(tests, plural.Many, []string{"20", "30", "40", "50", "60", "70", "80", "90", "100", "1000", "10000", "100000", "1000000"})
-
-	tests = appendIntegerTests(tests, plural.Other, []string{"0", "3~17", "101", "1001"})
-	tests = appendDecimalTests(tests, plural.Other, []string{"0.0~1.5", "10.0", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
-
-	tags := []language.Tag{
-		tag_he, tag_iw,
-	}
-	for _, tag := range tags {
-		runTests(t, tag, tests)
-	}
-}
-
-func TestCardinal_24(t *testing.T) {
+func TestCardinal_28(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1"})
@@ -468,7 +549,7 @@ func TestCardinal_24(t *testing.T) {
 	}
 }
 
-func TestCardinal_25(t *testing.T) {
+func TestCardinal_29(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1"})
@@ -487,7 +568,7 @@ func TestCardinal_25(t *testing.T) {
 	}
 }
 
-func TestCardinal_26(t *testing.T) {
+func TestCardinal_30(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "21", "31", "41", "51", "61", "71", "81", "101", "1001"})
@@ -509,7 +590,7 @@ func TestCardinal_26(t *testing.T) {
 	}
 }
 
-func TestCardinal_27(t *testing.T) {
+func TestCardinal_31(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "21", "31", "41", "51", "61", "71", "81", "101", "1001"})
@@ -531,30 +612,7 @@ func TestCardinal_27(t *testing.T) {
 	}
 }
 
-func TestCardinal_28(t *testing.T) {
-	var tests []pluralFormTest
-
-	tests = appendIntegerTests(tests, plural.One, []string{"1"})
-	tests = appendDecimalTests(tests, plural.One, []string{"1.0", "1.00", "1.000", "1.0000"})
-
-	tests = appendIntegerTests(tests, plural.Few, []string{"0", "2~10", "102~107", "1002"})
-	tests = appendDecimalTests(tests, plural.Few, []string{"0.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0", "8.0", "10.0", "102.0", "1002.0"})
-
-	tests = appendIntegerTests(tests, plural.Many, []string{"11~19", "111~117", "1011"})
-	tests = appendDecimalTests(tests, plural.Many, []string{"11.0", "12.0", "13.0", "14.0", "15.0", "16.0", "17.0", "18.0", "111.0", "1011.0"})
-
-	tests = appendIntegerTests(tests, plural.Other, []string{"20~35", "100", "1000", "10000", "100000", "1000000"})
-	tests = appendDecimalTests(tests, plural.Other, []string{"0.1~0.9", "1.1~1.7", "10.1", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
-
-	tags := []language.Tag{
-		tag_mt,
-	}
-	for _, tag := range tags {
-		runTests(t, tag, tests)
-	}
-}
-
-func TestCardinal_29(t *testing.T) {
+func TestCardinal_32(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "21", "31", "41", "51", "61", "71", "81", "101", "1001"})
@@ -573,7 +631,7 @@ func TestCardinal_29(t *testing.T) {
 	}
 }
 
-func TestCardinal_30(t *testing.T) {
+func TestCardinal_33(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "21", "31", "41", "51", "61", "81", "101", "1001"})
@@ -586,7 +644,7 @@ func TestCardinal_30(t *testing.T) {
 	tests = appendDecimalTests(tests, plural.Few, []string{"3.0", "4.0", "9.0", "23.0", "24.0", "29.0", "33.0", "34.0", "103.0", "1003.0"})
 
 	tests = appendIntegerTests(tests, plural.Many, []string{"1000000"})
-	tests = appendDecimalTests(tests, plural.Many, []string{"1000000.0", "1000000.00", "1000000.000"})
+	tests = appendDecimalTests(tests, plural.Many, []string{"1000000.0", "1000000.00", "1000000.000", "1000000.0000"})
 
 	tests = appendIntegerTests(tests, plural.Other, []string{"0", "5~8", "10~20", "100", "1000", "10000", "100000"})
 	tests = appendDecimalTests(tests, plural.Other, []string{"0.0~0.9", "1.1~1.6", "10.0", "100.0", "1000.0", "10000.0", "100000.0"})
@@ -599,7 +657,33 @@ func TestCardinal_30(t *testing.T) {
 	}
 }
 
-func TestCardinal_31(t *testing.T) {
+func TestCardinal_34(t *testing.T) {
+	var tests []pluralFormTest
+
+	tests = appendIntegerTests(tests, plural.One, []string{"1"})
+	tests = appendDecimalTests(tests, plural.One, []string{"1.0", "1.00", "1.000", "1.0000"})
+
+	tests = appendIntegerTests(tests, plural.Two, []string{"2"})
+	tests = appendDecimalTests(tests, plural.Two, []string{"2.0", "2.00", "2.000", "2.0000"})
+
+	tests = appendIntegerTests(tests, plural.Few, []string{"0", "3~10", "103~109", "1003"})
+	tests = appendDecimalTests(tests, plural.Few, []string{"0.0", "3.0", "4.0", "5.0", "6.0", "7.0", "8.0", "9.0", "10.0", "103.0", "1003.0"})
+
+	tests = appendIntegerTests(tests, plural.Many, []string{"11~19", "111~117", "1011"})
+	tests = appendDecimalTests(tests, plural.Many, []string{"11.0", "12.0", "13.0", "14.0", "15.0", "16.0", "17.0", "18.0", "111.0", "1011.0"})
+
+	tests = appendIntegerTests(tests, plural.Other, []string{"20~35", "100", "1000", "10000", "100000", "1000000"})
+	tests = appendDecimalTests(tests, plural.Other, []string{"0.1~0.9", "1.1~1.7", "10.1", "100.0", "1000.0", "10000.0", "100000.0", "1000000.0"})
+
+	tags := []language.Tag{
+		tag_mt,
+	}
+	for _, tag := range tags {
+		runTests(t, tag, tests)
+	}
+}
+
+func TestCardinal_35(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1"})
@@ -625,7 +709,7 @@ func TestCardinal_31(t *testing.T) {
 	}
 }
 
-func TestCardinal_32(t *testing.T) {
+func TestCardinal_36(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.One, []string{"1", "11", "21", "31", "41", "51", "61", "71", "101", "1001"})
@@ -646,7 +730,7 @@ func TestCardinal_32(t *testing.T) {
 	}
 }
 
-func TestCardinal_33(t *testing.T) {
+func TestCardinal_37(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.Zero, []string{"0"})
@@ -675,7 +759,7 @@ func TestCardinal_33(t *testing.T) {
 	}
 }
 
-func TestCardinal_34(t *testing.T) {
+func TestCardinal_38(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.Zero, []string{"0"})
@@ -704,7 +788,7 @@ func TestCardinal_34(t *testing.T) {
 	}
 }
 
-func TestCardinal_35(t *testing.T) {
+func TestCardinal_39(t *testing.T) {
 	var tests []pluralFormTest
 
 	tests = appendIntegerTests(tests, plural.Zero, []string{"0"})

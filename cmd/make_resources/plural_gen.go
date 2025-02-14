@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log/slog"
 	"path/filepath"
 	"strings"
 
@@ -89,6 +90,7 @@ func pluralRules(data *cldr.SupplementalData) map[string]string {
 	cardinalsFile := filepath.Join(resourcesDir, "gen_plural_cardinals.go")
 	err := executeAndWrite(pluralTemplate, cardinalData, cardinalsFile)
 	if err != nil {
+		slog.Error("Error generating cardinals", slog.String("file", pluralTemplate))
 		panic(err)
 	}
 	cardinalsTestFile := filepath.Join(resourcesDir, "gen_plural_cardinals_test.go")

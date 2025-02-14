@@ -12,7 +12,7 @@ type pluralForms []plural.Form
 type pluralFunc func(ops *cldr.PluralOperands) plural.Form
 
 func cardinal_0() cldr.PluralData {
-	// for locales: [bm bo dz id ig ii in ja jbo jv jw kde kea km ko lkt lo ms my nqo osa root sah ses sg su th to vi wo yo yue zh]
+	// for locales: [bm bo dz hnj id ig ii in ja jbo jv jw kde kea km ko lkt lo ms my nqo osa root sah ses sg su th to tpi vi wo yo yue zh]
 	forms := pluralForms{
 		plural.Other,
 	}
@@ -24,7 +24,7 @@ func cardinal_0() cldr.PluralData {
 }
 
 func cardinal_1() cldr.PluralData {
-	// for locales: [am as bn fa gu hi kn pcm zu]
+	// for locales: [am as bn doi fa gu hi kn pcm zu]
 	forms := pluralForms{
 		plural.One,
 		plural.Other,
@@ -42,7 +42,7 @@ func cardinal_1() cldr.PluralData {
 }
 
 func cardinal_2() cldr.PluralData {
-	// for locales: [ff fr hy kab]
+	// for locales: [ff hy kab]
 	forms := pluralForms{
 		plural.One,
 		plural.Other,
@@ -59,24 +59,7 @@ func cardinal_2() cldr.PluralData {
 }
 
 func cardinal_3() cldr.PluralData {
-	// for locales: [pt]
-	forms := pluralForms{
-		plural.One,
-		plural.Other,
-	}
-	plFunc := func(ops *cldr.PluralOperands) plural.Form {
-		// i = 0..1
-		if intInRange(ops.I, 0, 1) {
-			return plural.One
-		}
-		return plural.Other
-	}
-
-	return cldr.PluralData{Forms: forms, Func: plFunc}
-}
-
-func cardinal_4() cldr.PluralData {
-	// for locales: [ast ca de en et fi fy gl ia io it ji nl pt_PT sc scn sv sw ur yi]
+	// for locales: [ast de en et fi fy gl ia io ji lij nl sc sv sw ur yi]
 	forms := pluralForms{
 		plural.One,
 		plural.Other,
@@ -92,7 +75,7 @@ func cardinal_4() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_5() cldr.PluralData {
+func cardinal_4() cldr.PluralData {
 	// for locales: [si]
 	forms := pluralForms{
 		plural.One,
@@ -110,8 +93,8 @@ func cardinal_5() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_6() cldr.PluralData {
-	// for locales: [ak bho guw ln mg nso pa ti wa]
+func cardinal_5() cldr.PluralData {
+	// for locales: [ak bho csw guw ln mg nso pa ti wa]
 	forms := pluralForms{
 		plural.One,
 		plural.Other,
@@ -127,7 +110,7 @@ func cardinal_6() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_7() cldr.PluralData {
+func cardinal_6() cldr.PluralData {
 	// for locales: [tzm]
 	forms := pluralForms{
 		plural.One,
@@ -145,8 +128,8 @@ func cardinal_7() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_8() cldr.PluralData {
-	// for locales: [af an asa az bem bez bg brx ce cgg chr ckb dv ee el eo es eu fo fur gsw ha haw hu jgo jmc ka kaj kcg kk kkj kl ks ksb ku ky lb lg mas mgo ml mn mr nah nb nd ne nn nnh no nr ny nyn om or os pap ps rm rof rwk saq sd sdh seh sn so sq ss ssy st syr ta te teo tig tk tn tr ts ug uz ve vo vun wae xh xog]
+func cardinal_7() cldr.PluralData {
+	// for locales: [af an asa az bal bem bez bg brx ce cgg chr ckb dv ee el eo eu fo fur gsw ha haw hu jgo jmc ka kaj kcg kk kkj kl ks ksb ku ky lb lg mas mgo ml mn mr nah nb nd ne nn nnh no nr ny nyn om or os pap ps rm rof rwk saq sd sdh seh sn so sq ss ssy st syr ta te teo tig tk tn tr ts ug uz ve vo vun wae xh xog]
 	forms := pluralForms{
 		plural.One,
 		plural.Other,
@@ -162,7 +145,7 @@ func cardinal_8() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_9() cldr.PluralData {
+func cardinal_8() cldr.PluralData {
 	// for locales: [da]
 	forms := pluralForms{
 		plural.One,
@@ -180,16 +163,16 @@ func cardinal_9() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_10() cldr.PluralData {
+func cardinal_9() cldr.PluralData {
 	// for locales: [is]
 	forms := pluralForms{
 		plural.One,
 		plural.Other,
 	}
 	plFunc := func(ops *cldr.PluralOperands) plural.Form {
-		// t = 0 and i % 10 = 1 and i % 100 != 11 or t != 0
+		// t = 0 and i % 10 = 1 and i % 100 != 11 or t % 10 = 1 and t % 100 != 11
 		if intEqualsAny(ops.T, 0) && intEqualsAny(ops.I%10, 1) && !intEqualsAny(ops.I%100, 11) ||
-			!intEqualsAny(ops.T, 0) {
+			intEqualsAny(ops.T%10, 1) && !intEqualsAny(ops.T%100, 11) {
 			return plural.One
 		}
 		return plural.Other
@@ -198,7 +181,7 @@ func cardinal_10() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_11() cldr.PluralData {
+func cardinal_10() cldr.PluralData {
 	// for locales: [mk]
 	forms := pluralForms{
 		plural.One,
@@ -216,7 +199,7 @@ func cardinal_11() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_12() cldr.PluralData {
+func cardinal_11() cldr.PluralData {
 	// for locales: [ceb fil tl]
 	forms := pluralForms{
 		plural.One,
@@ -235,7 +218,7 @@ func cardinal_12() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_13() cldr.PluralData {
+func cardinal_12() cldr.PluralData {
 	// for locales: [lv prg]
 	forms := pluralForms{
 		plural.Zero,
@@ -261,7 +244,7 @@ func cardinal_13() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_14() cldr.PluralData {
+func cardinal_13() cldr.PluralData {
 	// for locales: [lag]
 	forms := pluralForms{
 		plural.Zero,
@@ -275,6 +258,28 @@ func cardinal_14() cldr.PluralData {
 		}
 		// i = 0,1 and n != 0
 		if intEqualsAny(ops.I, 0, 1) && !ops.NEqualsAny(0) {
+			return plural.One
+		}
+		return plural.Other
+	}
+
+	return cldr.PluralData{Forms: forms, Func: plFunc}
+}
+
+func cardinal_14() cldr.PluralData {
+	// for locales: [blo]
+	forms := pluralForms{
+		plural.Zero,
+		plural.One,
+		plural.Other,
+	}
+	plFunc := func(ops *cldr.PluralOperands) plural.Form {
+		// n = 0
+		if ops.NEqualsAny(0) {
+			return plural.Zero
+		}
+		// n = 1
+		if ops.NEqualsAny(1) {
 			return plural.One
 		}
 		return plural.Other
@@ -306,6 +311,29 @@ func cardinal_15() cldr.PluralData {
 }
 
 func cardinal_16() cldr.PluralData {
+	// for locales: [he iw]
+	forms := pluralForms{
+		plural.One,
+		plural.Two,
+		plural.Other,
+	}
+	plFunc := func(ops *cldr.PluralOperands) plural.Form {
+		// i = 1 and v = 0 or i = 0 and v != 0
+		if intEqualsAny(ops.I, 1) && intEqualsAny(ops.V, 0) ||
+			intEqualsAny(ops.I, 0) && !intEqualsAny(ops.V, 0) {
+			return plural.One
+		}
+		// i = 2 and v = 0
+		if intEqualsAny(ops.I, 2) && intEqualsAny(ops.V, 0) {
+			return plural.Two
+		}
+		return plural.Other
+	}
+
+	return cldr.PluralData{Forms: forms, Func: plFunc}
+}
+
+func cardinal_17() cldr.PluralData {
 	// for locales: [iu naq sat se sma smi smj smn sms]
 	forms := pluralForms{
 		plural.One,
@@ -327,7 +355,7 @@ func cardinal_16() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_17() cldr.PluralData {
+func cardinal_18() cldr.PluralData {
 	// for locales: [shi]
 	forms := pluralForms{
 		plural.One,
@@ -350,7 +378,7 @@ func cardinal_17() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_18() cldr.PluralData {
+func cardinal_19() cldr.PluralData {
 	// for locales: [mo ro]
 	forms := pluralForms{
 		plural.One,
@@ -362,10 +390,10 @@ func cardinal_18() cldr.PluralData {
 		if intEqualsAny(ops.I, 1) && intEqualsAny(ops.V, 0) {
 			return plural.One
 		}
-		// v != 0 or n = 0 or n % 100 = 2..19
+		// v != 0 or n = 0 or n != 1 and n % 100 = 1..19
 		if !intEqualsAny(ops.V, 0) ||
 			ops.NEqualsAny(0) ||
-			ops.NModInRange(100, 2, 19) {
+			!ops.NEqualsAny(1) && ops.NModInRange(100, 1, 19) {
 			return plural.Few
 		}
 		return plural.Other
@@ -374,7 +402,7 @@ func cardinal_18() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_19() cldr.PluralData {
+func cardinal_20() cldr.PluralData {
 	// for locales: [bs hr sh sr]
 	forms := pluralForms{
 		plural.One,
@@ -398,7 +426,99 @@ func cardinal_19() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_20() cldr.PluralData {
+func cardinal_21() cldr.PluralData {
+	// for locales: [fr]
+	forms := pluralForms{
+		plural.One,
+		plural.Many,
+		plural.Other,
+	}
+	plFunc := func(ops *cldr.PluralOperands) plural.Form {
+		// i = 0,1
+		if intEqualsAny(ops.I, 0, 1) {
+			return plural.One
+		}
+		// e = 0 and i != 0 and i % 1000000 = 0 and v = 0 or e != 0..5
+		if intEqualsAny(ops.C, 0) && !intEqualsAny(ops.I, 0) && intEqualsAny(ops.I%1000000, 0) && intEqualsAny(ops.V, 0) ||
+			!intInRange(ops.C, 0, 5) {
+			return plural.Many
+		}
+		return plural.Other
+	}
+
+	return cldr.PluralData{Forms: forms, Func: plFunc}
+}
+
+func cardinal_22() cldr.PluralData {
+	// for locales: [pt]
+	forms := pluralForms{
+		plural.One,
+		plural.Many,
+		plural.Other,
+	}
+	plFunc := func(ops *cldr.PluralOperands) plural.Form {
+		// i = 0..1
+		if intInRange(ops.I, 0, 1) {
+			return plural.One
+		}
+		// e = 0 and i != 0 and i % 1000000 = 0 and v = 0 or e != 0..5
+		if intEqualsAny(ops.C, 0) && !intEqualsAny(ops.I, 0) && intEqualsAny(ops.I%1000000, 0) && intEqualsAny(ops.V, 0) ||
+			!intInRange(ops.C, 0, 5) {
+			return plural.Many
+		}
+		return plural.Other
+	}
+
+	return cldr.PluralData{Forms: forms, Func: plFunc}
+}
+
+func cardinal_23() cldr.PluralData {
+	// for locales: [ca it lld pt_PT scn vec]
+	forms := pluralForms{
+		plural.One,
+		plural.Many,
+		plural.Other,
+	}
+	plFunc := func(ops *cldr.PluralOperands) plural.Form {
+		// i = 1 and v = 0
+		if intEqualsAny(ops.I, 1) && intEqualsAny(ops.V, 0) {
+			return plural.One
+		}
+		// e = 0 and i != 0 and i % 1000000 = 0 and v = 0 or e != 0..5
+		if intEqualsAny(ops.C, 0) && !intEqualsAny(ops.I, 0) && intEqualsAny(ops.I%1000000, 0) && intEqualsAny(ops.V, 0) ||
+			!intInRange(ops.C, 0, 5) {
+			return plural.Many
+		}
+		return plural.Other
+	}
+
+	return cldr.PluralData{Forms: forms, Func: plFunc}
+}
+
+func cardinal_24() cldr.PluralData {
+	// for locales: [es]
+	forms := pluralForms{
+		plural.One,
+		plural.Many,
+		plural.Other,
+	}
+	plFunc := func(ops *cldr.PluralOperands) plural.Form {
+		// n = 1
+		if ops.NEqualsAny(1) {
+			return plural.One
+		}
+		// e = 0 and i != 0 and i % 1000000 = 0 and v = 0 or e != 0..5
+		if intEqualsAny(ops.C, 0) && !intEqualsAny(ops.I, 0) && intEqualsAny(ops.I%1000000, 0) && intEqualsAny(ops.V, 0) ||
+			!intInRange(ops.C, 0, 5) {
+			return plural.Many
+		}
+		return plural.Other
+	}
+
+	return cldr.PluralData{Forms: forms, Func: plFunc}
+}
+
+func cardinal_25() cldr.PluralData {
 	// for locales: [gd]
 	forms := pluralForms{
 		plural.One,
@@ -425,7 +545,7 @@ func cardinal_20() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_21() cldr.PluralData {
+func cardinal_26() cldr.PluralData {
 	// for locales: [sl]
 	forms := pluralForms{
 		plural.One,
@@ -453,7 +573,7 @@ func cardinal_21() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_22() cldr.PluralData {
+func cardinal_27() cldr.PluralData {
 	// for locales: [dsb hsb]
 	forms := pluralForms{
 		plural.One,
@@ -483,34 +603,7 @@ func cardinal_22() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_23() cldr.PluralData {
-	// for locales: [he iw]
-	forms := pluralForms{
-		plural.One,
-		plural.Two,
-		plural.Many,
-		plural.Other,
-	}
-	plFunc := func(ops *cldr.PluralOperands) plural.Form {
-		// i = 1 and v = 0
-		if intEqualsAny(ops.I, 1) && intEqualsAny(ops.V, 0) {
-			return plural.One
-		}
-		// i = 2 and v = 0
-		if intEqualsAny(ops.I, 2) && intEqualsAny(ops.V, 0) {
-			return plural.Two
-		}
-		// v = 0 and n != 0..10 and n % 10 = 0
-		if intEqualsAny(ops.V, 0) && !ops.NInRange(0, 10) && ops.NModEqualsAny(10, 0) {
-			return plural.Many
-		}
-		return plural.Other
-	}
-
-	return cldr.PluralData{Forms: forms, Func: plFunc}
-}
-
-func cardinal_24() cldr.PluralData {
+func cardinal_28() cldr.PluralData {
 	// for locales: [cs sk]
 	forms := pluralForms{
 		plural.One,
@@ -537,7 +630,7 @@ func cardinal_24() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_25() cldr.PluralData {
+func cardinal_29() cldr.PluralData {
 	// for locales: [pl]
 	forms := pluralForms{
 		plural.One,
@@ -566,7 +659,7 @@ func cardinal_25() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_26() cldr.PluralData {
+func cardinal_30() cldr.PluralData {
 	// for locales: [be]
 	forms := pluralForms{
 		plural.One,
@@ -595,7 +688,7 @@ func cardinal_26() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_27() cldr.PluralData {
+func cardinal_31() cldr.PluralData {
 	// for locales: [lt]
 	forms := pluralForms{
 		plural.One,
@@ -622,35 +715,7 @@ func cardinal_27() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_28() cldr.PluralData {
-	// for locales: [mt]
-	forms := pluralForms{
-		plural.One,
-		plural.Few,
-		plural.Many,
-		plural.Other,
-	}
-	plFunc := func(ops *cldr.PluralOperands) plural.Form {
-		// n = 1
-		if ops.NEqualsAny(1) {
-			return plural.One
-		}
-		// n = 0 or n % 100 = 2..10
-		if ops.NEqualsAny(0) ||
-			ops.NModInRange(100, 2, 10) {
-			return plural.Few
-		}
-		// n % 100 = 11..19
-		if ops.NModInRange(100, 11, 19) {
-			return plural.Many
-		}
-		return plural.Other
-	}
-
-	return cldr.PluralData{Forms: forms, Func: plFunc}
-}
-
-func cardinal_29() cldr.PluralData {
+func cardinal_32() cldr.PluralData {
 	// for locales: [ru uk]
 	forms := pluralForms{
 		plural.One,
@@ -679,7 +744,7 @@ func cardinal_29() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_30() cldr.PluralData {
+func cardinal_33() cldr.PluralData {
 	// for locales: [br]
 	forms := pluralForms{
 		plural.One,
@@ -711,7 +776,40 @@ func cardinal_30() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_31() cldr.PluralData {
+func cardinal_34() cldr.PluralData {
+	// for locales: [mt]
+	forms := pluralForms{
+		plural.One,
+		plural.Two,
+		plural.Few,
+		plural.Many,
+		plural.Other,
+	}
+	plFunc := func(ops *cldr.PluralOperands) plural.Form {
+		// n = 1
+		if ops.NEqualsAny(1) {
+			return plural.One
+		}
+		// n = 2
+		if ops.NEqualsAny(2) {
+			return plural.Two
+		}
+		// n = 0 or n % 100 = 3..10
+		if ops.NEqualsAny(0) ||
+			ops.NModInRange(100, 3, 10) {
+			return plural.Few
+		}
+		// n % 100 = 11..19
+		if ops.NModInRange(100, 11, 19) {
+			return plural.Many
+		}
+		return plural.Other
+	}
+
+	return cldr.PluralData{Forms: forms, Func: plFunc}
+}
+
+func cardinal_35() cldr.PluralData {
 	// for locales: [ga]
 	forms := pluralForms{
 		plural.One,
@@ -743,7 +841,7 @@ func cardinal_31() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_32() cldr.PluralData {
+func cardinal_36() cldr.PluralData {
 	// for locales: [gv]
 	forms := pluralForms{
 		plural.One,
@@ -775,7 +873,7 @@ func cardinal_32() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_33() cldr.PluralData {
+func cardinal_37() cldr.PluralData {
 	// for locales: [kw]
 	forms := pluralForms{
 		plural.Zero,
@@ -814,7 +912,7 @@ func cardinal_33() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_34() cldr.PluralData {
+func cardinal_38() cldr.PluralData {
 	// for locales: [ar ars]
 	forms := pluralForms{
 		plural.Zero,
@@ -851,7 +949,7 @@ func cardinal_34() cldr.PluralData {
 	return cldr.PluralData{Forms: forms, Func: plFunc}
 }
 
-func cardinal_35() cldr.PluralData {
+func cardinal_39() cldr.PluralData {
 	// for locales: [cy]
 	forms := pluralForms{
 		plural.Zero,
@@ -889,215 +987,224 @@ func cardinal_35() cldr.PluralData {
 }
 
 var cardinalPlural = map[language.Tag]func() cldr.PluralData{
-	tag_af:    cardinal_8,
-	tag_ak:    cardinal_6,
+	tag_af:    cardinal_7,
+	tag_ak:    cardinal_5,
 	tag_am:    cardinal_1,
-	tag_an:    cardinal_8,
-	tag_ar:    cardinal_34,
-	tag_ars:   cardinal_34,
+	tag_an:    cardinal_7,
+	tag_ar:    cardinal_38,
+	tag_ars:   cardinal_38,
 	tag_as:    cardinal_1,
-	tag_asa:   cardinal_8,
-	tag_ast:   cardinal_4,
-	tag_az:    cardinal_8,
-	tag_be:    cardinal_26,
-	tag_bem:   cardinal_8,
-	tag_bez:   cardinal_8,
-	tag_bg:    cardinal_8,
-	tag_bho:   cardinal_6,
+	tag_asa:   cardinal_7,
+	tag_ast:   cardinal_3,
+	tag_az:    cardinal_7,
+	tag_bal:   cardinal_7,
+	tag_be:    cardinal_30,
+	tag_bem:   cardinal_7,
+	tag_bez:   cardinal_7,
+	tag_bg:    cardinal_7,
+	tag_bho:   cardinal_5,
+	tag_blo:   cardinal_14,
 	tag_bm:    cardinal_0,
 	tag_bn:    cardinal_1,
 	tag_bo:    cardinal_0,
-	tag_br:    cardinal_30,
-	tag_brx:   cardinal_8,
-	tag_bs:    cardinal_19,
-	tag_ca:    cardinal_4,
-	tag_ce:    cardinal_8,
-	tag_ceb:   cardinal_12,
-	tag_cgg:   cardinal_8,
-	tag_chr:   cardinal_8,
-	tag_ckb:   cardinal_8,
-	tag_cs:    cardinal_24,
-	tag_cy:    cardinal_35,
-	tag_da:    cardinal_9,
-	tag_de:    cardinal_4,
-	tag_dsb:   cardinal_22,
-	tag_dv:    cardinal_8,
+	tag_br:    cardinal_33,
+	tag_brx:   cardinal_7,
+	tag_bs:    cardinal_20,
+	tag_ca:    cardinal_23,
+	tag_ce:    cardinal_7,
+	tag_ceb:   cardinal_11,
+	tag_cgg:   cardinal_7,
+	tag_chr:   cardinal_7,
+	tag_ckb:   cardinal_7,
+	tag_cs:    cardinal_28,
+	tag_csw:   cardinal_5,
+	tag_cy:    cardinal_39,
+	tag_da:    cardinal_8,
+	tag_de:    cardinal_3,
+	tag_doi:   cardinal_1,
+	tag_dsb:   cardinal_27,
+	tag_dv:    cardinal_7,
 	tag_dz:    cardinal_0,
-	tag_ee:    cardinal_8,
-	tag_el:    cardinal_8,
-	tag_en:    cardinal_4,
-	tag_eo:    cardinal_8,
-	tag_es:    cardinal_8,
-	tag_et:    cardinal_4,
-	tag_eu:    cardinal_8,
+	tag_ee:    cardinal_7,
+	tag_el:    cardinal_7,
+	tag_en:    cardinal_3,
+	tag_eo:    cardinal_7,
+	tag_es:    cardinal_24,
+	tag_et:    cardinal_3,
+	tag_eu:    cardinal_7,
 	tag_fa:    cardinal_1,
 	tag_ff:    cardinal_2,
-	tag_fi:    cardinal_4,
-	tag_fil:   cardinal_12,
-	tag_fo:    cardinal_8,
-	tag_fr:    cardinal_2,
-	tag_fur:   cardinal_8,
-	tag_fy:    cardinal_4,
-	tag_ga:    cardinal_31,
-	tag_gd:    cardinal_20,
-	tag_gl:    cardinal_4,
-	tag_gsw:   cardinal_8,
+	tag_fi:    cardinal_3,
+	tag_fil:   cardinal_11,
+	tag_fo:    cardinal_7,
+	tag_fr:    cardinal_21,
+	tag_fur:   cardinal_7,
+	tag_fy:    cardinal_3,
+	tag_ga:    cardinal_35,
+	tag_gd:    cardinal_25,
+	tag_gl:    cardinal_3,
+	tag_gsw:   cardinal_7,
 	tag_gu:    cardinal_1,
-	tag_guw:   cardinal_6,
-	tag_gv:    cardinal_32,
-	tag_ha:    cardinal_8,
-	tag_haw:   cardinal_8,
-	tag_he:    cardinal_23,
+	tag_guw:   cardinal_5,
+	tag_gv:    cardinal_36,
+	tag_ha:    cardinal_7,
+	tag_haw:   cardinal_7,
+	tag_he:    cardinal_16,
 	tag_hi:    cardinal_1,
-	tag_hr:    cardinal_19,
-	tag_hsb:   cardinal_22,
-	tag_hu:    cardinal_8,
+	tag_hnj:   cardinal_0,
+	tag_hr:    cardinal_20,
+	tag_hsb:   cardinal_27,
+	tag_hu:    cardinal_7,
 	tag_hy:    cardinal_2,
-	tag_ia:    cardinal_4,
+	tag_ia:    cardinal_3,
 	tag_id:    cardinal_0,
 	tag_ig:    cardinal_0,
 	tag_ii:    cardinal_0,
 	tag_in:    cardinal_0,
-	tag_io:    cardinal_4,
-	tag_is:    cardinal_10,
-	tag_it:    cardinal_4,
-	tag_iu:    cardinal_16,
-	tag_iw:    cardinal_23,
+	tag_io:    cardinal_3,
+	tag_is:    cardinal_9,
+	tag_it:    cardinal_23,
+	tag_iu:    cardinal_17,
+	tag_iw:    cardinal_16,
 	tag_ja:    cardinal_0,
 	tag_jbo:   cardinal_0,
-	tag_jgo:   cardinal_8,
-	tag_ji:    cardinal_4,
-	tag_jmc:   cardinal_8,
+	tag_jgo:   cardinal_7,
+	tag_ji:    cardinal_3,
+	tag_jmc:   cardinal_7,
 	tag_jv:    cardinal_0,
 	tag_jw:    cardinal_0,
-	tag_ka:    cardinal_8,
+	tag_ka:    cardinal_7,
 	tag_kab:   cardinal_2,
-	tag_kaj:   cardinal_8,
-	tag_kcg:   cardinal_8,
+	tag_kaj:   cardinal_7,
+	tag_kcg:   cardinal_7,
 	tag_kde:   cardinal_0,
 	tag_kea:   cardinal_0,
-	tag_kk:    cardinal_8,
-	tag_kkj:   cardinal_8,
-	tag_kl:    cardinal_8,
+	tag_kk:    cardinal_7,
+	tag_kkj:   cardinal_7,
+	tag_kl:    cardinal_7,
 	tag_km:    cardinal_0,
 	tag_kn:    cardinal_1,
 	tag_ko:    cardinal_0,
-	tag_ks:    cardinal_8,
-	tag_ksb:   cardinal_8,
+	tag_ks:    cardinal_7,
+	tag_ksb:   cardinal_7,
 	tag_ksh:   cardinal_15,
-	tag_ku:    cardinal_8,
-	tag_kw:    cardinal_33,
-	tag_ky:    cardinal_8,
-	tag_lag:   cardinal_14,
-	tag_lb:    cardinal_8,
-	tag_lg:    cardinal_8,
+	tag_ku:    cardinal_7,
+	tag_kw:    cardinal_37,
+	tag_ky:    cardinal_7,
+	tag_lag:   cardinal_13,
+	tag_lb:    cardinal_7,
+	tag_lg:    cardinal_7,
+	tag_lij:   cardinal_3,
 	tag_lkt:   cardinal_0,
-	tag_ln:    cardinal_6,
+	tag_lld:   cardinal_23,
+	tag_ln:    cardinal_5,
 	tag_lo:    cardinal_0,
-	tag_lt:    cardinal_27,
-	tag_lv:    cardinal_13,
-	tag_mas:   cardinal_8,
-	tag_mg:    cardinal_6,
-	tag_mgo:   cardinal_8,
-	tag_mk:    cardinal_11,
-	tag_ml:    cardinal_8,
-	tag_mn:    cardinal_8,
-	tag_mo:    cardinal_18,
-	tag_mr:    cardinal_8,
+	tag_lt:    cardinal_31,
+	tag_lv:    cardinal_12,
+	tag_mas:   cardinal_7,
+	tag_mg:    cardinal_5,
+	tag_mgo:   cardinal_7,
+	tag_mk:    cardinal_10,
+	tag_ml:    cardinal_7,
+	tag_mn:    cardinal_7,
+	tag_mo:    cardinal_19,
+	tag_mr:    cardinal_7,
 	tag_ms:    cardinal_0,
-	tag_mt:    cardinal_28,
+	tag_mt:    cardinal_34,
 	tag_my:    cardinal_0,
-	tag_nah:   cardinal_8,
-	tag_naq:   cardinal_16,
-	tag_nb:    cardinal_8,
-	tag_nd:    cardinal_8,
-	tag_ne:    cardinal_8,
-	tag_nl:    cardinal_4,
-	tag_nn:    cardinal_8,
-	tag_nnh:   cardinal_8,
-	tag_no:    cardinal_8,
+	tag_nah:   cardinal_7,
+	tag_naq:   cardinal_17,
+	tag_nb:    cardinal_7,
+	tag_nd:    cardinal_7,
+	tag_ne:    cardinal_7,
+	tag_nl:    cardinal_3,
+	tag_nn:    cardinal_7,
+	tag_nnh:   cardinal_7,
+	tag_no:    cardinal_7,
 	tag_nqo:   cardinal_0,
-	tag_nr:    cardinal_8,
-	tag_nso:   cardinal_6,
-	tag_ny:    cardinal_8,
-	tag_nyn:   cardinal_8,
-	tag_om:    cardinal_8,
-	tag_or:    cardinal_8,
-	tag_os:    cardinal_8,
+	tag_nr:    cardinal_7,
+	tag_nso:   cardinal_5,
+	tag_ny:    cardinal_7,
+	tag_nyn:   cardinal_7,
+	tag_om:    cardinal_7,
+	tag_or:    cardinal_7,
+	tag_os:    cardinal_7,
 	tag_osa:   cardinal_0,
-	tag_pa:    cardinal_6,
-	tag_pap:   cardinal_8,
+	tag_pa:    cardinal_5,
+	tag_pap:   cardinal_7,
 	tag_pcm:   cardinal_1,
-	tag_pl:    cardinal_25,
-	tag_prg:   cardinal_13,
-	tag_ps:    cardinal_8,
-	tag_pt:    cardinal_3,
-	tag_pt_PT: cardinal_4,
-	tag_rm:    cardinal_8,
-	tag_ro:    cardinal_18,
-	tag_rof:   cardinal_8,
+	tag_pl:    cardinal_29,
+	tag_prg:   cardinal_12,
+	tag_ps:    cardinal_7,
+	tag_pt:    cardinal_22,
+	tag_pt_PT: cardinal_23,
+	tag_rm:    cardinal_7,
+	tag_ro:    cardinal_19,
+	tag_rof:   cardinal_7,
 	tag_root:  cardinal_0,
-	tag_ru:    cardinal_29,
-	tag_rwk:   cardinal_8,
+	tag_ru:    cardinal_32,
+	tag_rwk:   cardinal_7,
 	tag_sah:   cardinal_0,
-	tag_saq:   cardinal_8,
-	tag_sat:   cardinal_16,
-	tag_sc:    cardinal_4,
-	tag_scn:   cardinal_4,
-	tag_sd:    cardinal_8,
-	tag_sdh:   cardinal_8,
-	tag_se:    cardinal_16,
-	tag_seh:   cardinal_8,
+	tag_saq:   cardinal_7,
+	tag_sat:   cardinal_17,
+	tag_sc:    cardinal_3,
+	tag_scn:   cardinal_23,
+	tag_sd:    cardinal_7,
+	tag_sdh:   cardinal_7,
+	tag_se:    cardinal_17,
+	tag_seh:   cardinal_7,
 	tag_ses:   cardinal_0,
 	tag_sg:    cardinal_0,
-	tag_sh:    cardinal_19,
-	tag_shi:   cardinal_17,
-	tag_si:    cardinal_5,
-	tag_sk:    cardinal_24,
-	tag_sl:    cardinal_21,
-	tag_sma:   cardinal_16,
-	tag_smi:   cardinal_16,
-	tag_smj:   cardinal_16,
-	tag_smn:   cardinal_16,
-	tag_sms:   cardinal_16,
-	tag_sn:    cardinal_8,
-	tag_so:    cardinal_8,
-	tag_sq:    cardinal_8,
-	tag_sr:    cardinal_19,
-	tag_ss:    cardinal_8,
-	tag_ssy:   cardinal_8,
-	tag_st:    cardinal_8,
+	tag_sh:    cardinal_20,
+	tag_shi:   cardinal_18,
+	tag_si:    cardinal_4,
+	tag_sk:    cardinal_28,
+	tag_sl:    cardinal_26,
+	tag_sma:   cardinal_17,
+	tag_smi:   cardinal_17,
+	tag_smj:   cardinal_17,
+	tag_smn:   cardinal_17,
+	tag_sms:   cardinal_17,
+	tag_sn:    cardinal_7,
+	tag_so:    cardinal_7,
+	tag_sq:    cardinal_7,
+	tag_sr:    cardinal_20,
+	tag_ss:    cardinal_7,
+	tag_ssy:   cardinal_7,
+	tag_st:    cardinal_7,
 	tag_su:    cardinal_0,
-	tag_sv:    cardinal_4,
-	tag_sw:    cardinal_4,
-	tag_syr:   cardinal_8,
-	tag_ta:    cardinal_8,
-	tag_te:    cardinal_8,
-	tag_teo:   cardinal_8,
+	tag_sv:    cardinal_3,
+	tag_sw:    cardinal_3,
+	tag_syr:   cardinal_7,
+	tag_ta:    cardinal_7,
+	tag_te:    cardinal_7,
+	tag_teo:   cardinal_7,
 	tag_th:    cardinal_0,
-	tag_ti:    cardinal_6,
-	tag_tig:   cardinal_8,
-	tag_tk:    cardinal_8,
-	tag_tl:    cardinal_12,
-	tag_tn:    cardinal_8,
+	tag_ti:    cardinal_5,
+	tag_tig:   cardinal_7,
+	tag_tk:    cardinal_7,
+	tag_tl:    cardinal_11,
+	tag_tn:    cardinal_7,
 	tag_to:    cardinal_0,
-	tag_tr:    cardinal_8,
-	tag_ts:    cardinal_8,
-	tag_tzm:   cardinal_7,
-	tag_ug:    cardinal_8,
-	tag_uk:    cardinal_29,
-	tag_ur:    cardinal_4,
-	tag_uz:    cardinal_8,
-	tag_ve:    cardinal_8,
+	tag_tpi:   cardinal_0,
+	tag_tr:    cardinal_7,
+	tag_ts:    cardinal_7,
+	tag_tzm:   cardinal_6,
+	tag_ug:    cardinal_7,
+	tag_uk:    cardinal_32,
+	tag_ur:    cardinal_3,
+	tag_uz:    cardinal_7,
+	tag_ve:    cardinal_7,
+	tag_vec:   cardinal_23,
 	tag_vi:    cardinal_0,
-	tag_vo:    cardinal_8,
-	tag_vun:   cardinal_8,
-	tag_wa:    cardinal_6,
-	tag_wae:   cardinal_8,
+	tag_vo:    cardinal_7,
+	tag_vun:   cardinal_7,
+	tag_wa:    cardinal_5,
+	tag_wae:   cardinal_7,
 	tag_wo:    cardinal_0,
-	tag_xh:    cardinal_8,
-	tag_xog:   cardinal_8,
-	tag_yi:    cardinal_4,
+	tag_xh:    cardinal_7,
+	tag_xog:   cardinal_7,
+	tag_yi:    cardinal_3,
 	tag_yo:    cardinal_0,
 	tag_yue:   cardinal_0,
 	tag_zh:    cardinal_0,
