@@ -147,10 +147,13 @@ func TestFmtCurrencyWhole(t *testing.T) {
 
 func TestFmtNumber(t *testing.T) {
 	en, _ := resources.GetLocale(language.Make("en"))
+	fr, _ := resources.GetLocale(language.Make("fr"))
 	// check Hindi - different group sizes
 	hi, _ := resources.GetLocale(language.Make("hi"))
-	// check Uzbek - something with a partial fallback
+	// // check Uzbek - something with a partial fallback
 	uz, _ := resources.GetLocale(language.Make("uz"))
+
+	const testNumber = 12345.6789
 
 	tests := []struct {
 		locale *cldr.Locale
@@ -159,12 +162,12 @@ func TestFmtNumber(t *testing.T) {
 	}{
 		{
 			locale: en,
-			in:     12345.6789,
+			in:     testNumber,
 			out:    "12,345.679",
 		},
 		{
 			locale: en,
-			in:     -12345.6789,
+			in:     -testNumber,
 			out:    "-12,345.679",
 		},
 		{
@@ -173,13 +176,18 @@ func TestFmtNumber(t *testing.T) {
 			out:    "123,456,789",
 		},
 		{
+			locale: fr,
+			in:     testNumber,
+			out:    "12 345,679",
+		},
+		{
 			locale: hi,
-			in:     12345.6789,
+			in:     testNumber,
 			out:    "12,345.679",
 		},
 		{
 			locale: hi,
-			in:     -12345.6789,
+			in:     -testNumber,
 			out:    "-12,345.679",
 		},
 		{
@@ -189,18 +197,18 @@ func TestFmtNumber(t *testing.T) {
 		},
 		{
 			locale: uz,
-			in:     12345.6789,
-			out:    "12٬345٫679",
+			in:     testNumber,
+			out:    "12 345,679",
 		},
 		{
 			locale: uz,
-			in:     -12345.6789,
-			out:    "-12٬345٫679",
+			in:     -testNumber,
+			out:    "-12 345,679",
 		},
 		{
 			locale: uz,
 			in:     123456789,
-			out:    "123٬456٬789",
+			out:    "123 456 789",
 		},
 	}
 
@@ -211,8 +219,8 @@ func TestFmtNumber(t *testing.T) {
 		})
 	}
 
-	assert.Equal(t, "12,346", en.Number.FmtNumberWhole(12345.6789))
-	assert.Equal(t, "-12,346", en.Number.FmtNumberWhole(-12345.6789))
+	assert.Equal(t, "12,346", en.Number.FmtNumberWhole(testNumber))
+	assert.Equal(t, "-12,346", en.Number.FmtNumberWhole(-testNumber))
 }
 
 func TestFmtPercent(t *testing.T) {

@@ -2,6 +2,7 @@ package cldr
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -14,6 +15,8 @@ type PluralOperands struct {
 	W int64   // number of visible fraction digits in n, without trailing zeros
 	F int64   // visible fractional digits in n, with trailing zeros
 	T int64   // visible fractional digits in n, without trailing zeros
+	C int64   // compact decimal exponent value: exponent of the power of 10 used in compact decimal formatting.
+	// E int64   // a deprecated synonym for 'c'. Note: it may be redefined in the future.
 }
 
 // NEqualsAny returns true if o represents an integer equal to any of the arguments.
@@ -74,18 +77,53 @@ func newOperandsInt64(i int64) *PluralOperands {
 	if i < 0 {
 		i = -i
 	}
-	return &PluralOperands{float64(i), i, 0, 0, 0, 0}
+	return &PluralOperands{float64(i), i, 0, 0, 0, 0, 0}
 }
 
 func newOperandsString(s string) (*PluralOperands, error) {
 	if s[0] == '-' {
 		s = s[1:]
 	}
-	n, err := strconv.ParseFloat(s, 64)
-	if err != nil {
-		return nil, err
+
+	var n float64
+	var c int64
+	var err error
+
+	// see if we have a compact form such as 1.2c3
+	compactParts := strings.Split(s, "c")
+	if len(compactParts) == 2 {
+		pre, preErr := strconv.ParseFloat(compactParts[0], 64)
+		if preErr != nil {
+			return nil, preErr
+		}
+		post, postErr := strconv.ParseInt(compactParts[1], 10, 64)
+		if postErr != nil {
+			return nil, postErr
+		}
+		c = post
+		n = pre * math.Pow(10, float64(c))
+		if math.IsNaN(n) || math.IsInf(n, 0) {
+			return nil, fmt.Errorf("invalid compact number: %q", s)
+		}
+		// now we need to update `s` to move the decimal
+		// we need to calculate how many digits should be visible after the decimal point
+		decimalParts := strings.Split(compactParts[0], ".")
+		precision := -1
+		if len(decimalParts) == 2 {
+			precision = len(decimalParts[1]) - int(c)
+			if precision < 0 {
+				precision = -1
+			}
+		}
+		s = strconv.FormatFloat(n, 'f', precision, 64)
+	} else {
+		n, err = strconv.ParseFloat(s, 64)
+		if err != nil {
+			return nil, err
+		}
 	}
-	ops := &PluralOperands{N: n}
+
+	ops := &PluralOperands{N: n, C: c}
 	parts := strings.SplitN(s, ".", 2)
 	ops.I, err = strconv.ParseInt(parts[0], 10, 64)
 	if err != nil {
