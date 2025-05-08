@@ -3,7 +3,7 @@ module github.com/razor-1/cldr
 go 1.23
 
 require (
-	dario.cat/mergo v1.0.1
+	dario.cat/mergo v1.0.2
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/text v0.22.0
 )
