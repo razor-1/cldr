@@ -58,6 +58,7 @@ type aggregateData struct {
 // makePath is a helper to create a path if needed, and panic if MkdirAll encounters an error
 func makePath(path string) {
 	if _, err := os.Stat(path); err != nil {
+		// #nosec: G301
 		if err = os.MkdirAll(path, 0777); err != nil {
 			panic(err)
 		}
@@ -232,11 +233,14 @@ func executeAndWrite(templateFile string, data interface{}, outFileName string) 
 		return err
 	}
 
+	// #nosec: G304
 	outFile, err := os.Create(outFileName)
 	if err != nil {
 		return err
 	}
-	defer outFile.Close()
+	defer func() {
+		_ = outFile.Close()
+	}()
 
 	_, err = outFile.Write(formatted)
 	if err != nil {

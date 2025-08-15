@@ -1,3 +1,4 @@
+version: "2"
 linters:
   enable:
     - bodyclose
@@ -16,9 +17,6 @@ linters:
     - whitespace
     - sloglint
     - containedctx
-linters-settings:
-  cyclop:
-    max-complexity: 18
-#issues:
-#  include:
-#    - EXC0002 # disable excluding of issues about comments from golint
+  settings:
+    cyclop:
+      max-complexity: 18
