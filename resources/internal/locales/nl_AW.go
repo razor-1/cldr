@@ -338,7 +338,6 @@ func Get_nl_AW() *cldr.Locale {
 			language.AFH:     "Afrihili",
 			language.AGQ:     "Aghem",
 			language.AIN:     "Aino",
-			language.AJP:     "Zuid-Levantijns-Arabisch",
 			language.AK:      "Akan",
 			language.AKK:     "Akkadisch",
 			language.AKZ:     "Alabama",

@@ -166,6 +166,8 @@ var localeData = cldrData{
 	tag_ckb_IR:         locales.Get_ckb_IR,
 	tag_co:             locales.Get_co,
 	tag_co_FR:          locales.Get_co_FR,
+	tag_cop:            locales.Get_cop,
+	tag_cop_EG:         locales.Get_cop_EG,
 	tag_cs:             locales.Get_cs,
 	tag_cs_CZ:          locales.Get_cs_CZ,
 	tag_csw:            locales.Get_csw,
@@ -235,6 +237,7 @@ var localeData = cldrData{
 	tag_en_CM:          locales.Get_en_CM,
 	tag_en_CX:          locales.Get_en_CX,
 	tag_en_CY:          locales.Get_en_CY,
+	tag_en_CZ:          locales.Get_en_CZ,
 	tag_en_DE:          locales.Get_en_DE,
 	tag_en_DG:          locales.Get_en_DG,
 	tag_en_DK:          locales.Get_en_DK,
@@ -242,25 +245,30 @@ var localeData = cldrData{
 	tag_en_Dsrt:        locales.Get_en_Dsrt,
 	tag_en_Dsrt_US:     locales.Get_en_Dsrt_US,
 	tag_en_ER:          locales.Get_en_ER,
+	tag_en_ES:          locales.Get_en_ES,
 	tag_en_FI:          locales.Get_en_FI,
 	tag_en_FJ:          locales.Get_en_FJ,
 	tag_en_FK:          locales.Get_en_FK,
 	tag_en_FM:          locales.Get_en_FM,
+	tag_en_FR:          locales.Get_en_FR,
 	tag_en_GB:          locales.Get_en_GB,
 	tag_en_GD:          locales.Get_en_GD,
 	tag_en_GG:          locales.Get_en_GG,
 	tag_en_GH:          locales.Get_en_GH,
 	tag_en_GI:          locales.Get_en_GI,
 	tag_en_GM:          locales.Get_en_GM,
+	tag_en_GS:          locales.Get_en_GS,
 	tag_en_GU:          locales.Get_en_GU,
 	tag_en_GY:          locales.Get_en_GY,
 	tag_en_HK:          locales.Get_en_HK,
+	tag_en_HU:          locales.Get_en_HU,
 	tag_en_ID:          locales.Get_en_ID,
 	tag_en_IE:          locales.Get_en_IE,
 	tag_en_IL:          locales.Get_en_IL,
 	tag_en_IM:          locales.Get_en_IM,
 	tag_en_IN:          locales.Get_en_IN,
 	tag_en_IO:          locales.Get_en_IO,
+	tag_en_IT:          locales.Get_en_IT,
 	tag_en_JE:          locales.Get_en_JE,
 	tag_en_JM:          locales.Get_en_JM,
 	tag_en_KE:          locales.Get_en_KE,
@@ -284,15 +292,19 @@ var localeData = cldrData{
 	tag_en_NF:          locales.Get_en_NF,
 	tag_en_NG:          locales.Get_en_NG,
 	tag_en_NL:          locales.Get_en_NL,
+	tag_en_NO:          locales.Get_en_NO,
 	tag_en_NR:          locales.Get_en_NR,
 	tag_en_NU:          locales.Get_en_NU,
 	tag_en_NZ:          locales.Get_en_NZ,
 	tag_en_PG:          locales.Get_en_PG,
 	tag_en_PH:          locales.Get_en_PH,
 	tag_en_PK:          locales.Get_en_PK,
+	tag_en_PL:          locales.Get_en_PL,
 	tag_en_PN:          locales.Get_en_PN,
 	tag_en_PR:          locales.Get_en_PR,
+	tag_en_PT:          locales.Get_en_PT,
 	tag_en_PW:          locales.Get_en_PW,
+	tag_en_RO:          locales.Get_en_RO,
 	tag_en_RW:          locales.Get_en_RW,
 	tag_en_SB:          locales.Get_en_SB,
 	tag_en_SC:          locales.Get_en_SC,
@@ -301,6 +313,7 @@ var localeData = cldrData{
 	tag_en_SG:          locales.Get_en_SG,
 	tag_en_SH:          locales.Get_en_SH,
 	tag_en_SI:          locales.Get_en_SI,
+	tag_en_SK:          locales.Get_en_SK,
 	tag_en_SL:          locales.Get_en_SL,
 	tag_en_SS:          locales.Get_en_SS,
 	tag_en_SX:          locales.Get_en_SX,
@@ -499,6 +512,8 @@ var localeData = cldrData{
 	tag_hr_HR:          locales.Get_hr_HR,
 	tag_hsb:            locales.Get_hsb,
 	tag_hsb_DE:         locales.Get_hsb_DE,
+	tag_ht:             locales.Get_ht,
+	tag_ht_HT:          locales.Get_ht_HT,
 	tag_hu:             locales.Get_hu,
 	tag_hu_HU:          locales.Get_hu_HU,
 	tag_hy:             locales.Get_hy,
@@ -1059,6 +1074,7 @@ var localeData = cldrData{
 	tag_yue_Hant:       locales.Get_yue_Hant,
 	tag_yue_Hant_CN:    locales.Get_yue_Hant_CN,
 	tag_yue_Hant_HK:    locales.Get_yue_Hant_HK,
+	tag_yue_Hant_MO:    locales.Get_yue_Hant_MO,
 	tag_za:             locales.Get_za,
 	tag_za_CN:          locales.Get_za_CN,
 	tag_zgh:            locales.Get_zgh,
@@ -1236,6 +1252,8 @@ var tag_ckb_IQ = language.Make("ckb_IQ")
 var tag_ckb_IR = language.Make("ckb_IR")
 var tag_co = language.Make("co")
 var tag_co_FR = language.Make("co_FR")
+var tag_cop = language.Make("cop")
+var tag_cop_EG = language.Make("cop_EG")
 var tag_cs = language.Make("cs")
 var tag_cs_CZ = language.Make("cs_CZ")
 var tag_csw = language.Make("csw")
@@ -1305,6 +1323,7 @@ var tag_en_CK = language.Make("en_CK")
 var tag_en_CM = language.Make("en_CM")
 var tag_en_CX = language.Make("en_CX")
 var tag_en_CY = language.Make("en_CY")
+var tag_en_CZ = language.Make("en_CZ")
 var tag_en_DE = language.Make("en_DE")
 var tag_en_DG = language.Make("en_DG")
 var tag_en_DK = language.Make("en_DK")
@@ -1312,25 +1331,30 @@ var tag_en_DM = language.Make("en_DM")
 var tag_en_Dsrt = language.Make("en_Dsrt")
 var tag_en_Dsrt_US = language.Make("en_Dsrt_US")
 var tag_en_ER = language.Make("en_ER")
+var tag_en_ES = language.Make("en_ES")
 var tag_en_FI = language.Make("en_FI")
 var tag_en_FJ = language.Make("en_FJ")
 var tag_en_FK = language.Make("en_FK")
 var tag_en_FM = language.Make("en_FM")
+var tag_en_FR = language.Make("en_FR")
 var tag_en_GB = language.Make("en_GB")
 var tag_en_GD = language.Make("en_GD")
 var tag_en_GG = language.Make("en_GG")
 var tag_en_GH = language.Make("en_GH")
 var tag_en_GI = language.Make("en_GI")
 var tag_en_GM = language.Make("en_GM")
+var tag_en_GS = language.Make("en_GS")
 var tag_en_GU = language.Make("en_GU")
 var tag_en_GY = language.Make("en_GY")
 var tag_en_HK = language.Make("en_HK")
+var tag_en_HU = language.Make("en_HU")
 var tag_en_ID = language.Make("en_ID")
 var tag_en_IE = language.Make("en_IE")
 var tag_en_IL = language.Make("en_IL")
 var tag_en_IM = language.Make("en_IM")
 var tag_en_IN = language.Make("en_IN")
 var tag_en_IO = language.Make("en_IO")
+var tag_en_IT = language.Make("en_IT")
 var tag_en_JE = language.Make("en_JE")
 var tag_en_JM = language.Make("en_JM")
 var tag_en_KE = language.Make("en_KE")
@@ -1354,15 +1378,19 @@ var tag_en_NA = language.Make("en_NA")
 var tag_en_NF = language.Make("en_NF")
 var tag_en_NG = language.Make("en_NG")
 var tag_en_NL = language.Make("en_NL")
+var tag_en_NO = language.Make("en_NO")
 var tag_en_NR = language.Make("en_NR")
 var tag_en_NU = language.Make("en_NU")
 var tag_en_NZ = language.Make("en_NZ")
 var tag_en_PG = language.Make("en_PG")
 var tag_en_PH = language.Make("en_PH")
 var tag_en_PK = language.Make("en_PK")
+var tag_en_PL = language.Make("en_PL")
 var tag_en_PN = language.Make("en_PN")
 var tag_en_PR = language.Make("en_PR")
+var tag_en_PT = language.Make("en_PT")
 var tag_en_PW = language.Make("en_PW")
+var tag_en_RO = language.Make("en_RO")
 var tag_en_RW = language.Make("en_RW")
 var tag_en_SB = language.Make("en_SB")
 var tag_en_SC = language.Make("en_SC")
@@ -1371,6 +1399,7 @@ var tag_en_SE = language.Make("en_SE")
 var tag_en_SG = language.Make("en_SG")
 var tag_en_SH = language.Make("en_SH")
 var tag_en_SI = language.Make("en_SI")
+var tag_en_SK = language.Make("en_SK")
 var tag_en_SL = language.Make("en_SL")
 var tag_en_SS = language.Make("en_SS")
 var tag_en_SX = language.Make("en_SX")
@@ -1570,6 +1599,8 @@ var tag_hr_BA = language.Make("hr_BA")
 var tag_hr_HR = language.Make("hr_HR")
 var tag_hsb = language.Make("hsb")
 var tag_hsb_DE = language.Make("hsb_DE")
+var tag_ht = language.Make("ht")
+var tag_ht_HT = language.Make("ht_HT")
 var tag_hu = language.Make("hu")
 var tag_hu_HU = language.Make("hu_HU")
 var tag_hy = language.Make("hy")
@@ -2139,6 +2170,7 @@ var tag_yue_Hans_CN = language.Make("yue_Hans_CN")
 var tag_yue_Hant = language.Make("yue_Hant")
 var tag_yue_Hant_CN = language.Make("yue_Hant_CN")
 var tag_yue_Hant_HK = language.Make("yue_Hant_HK")
+var tag_yue_Hant_MO = language.Make("yue_Hant_MO")
 var tag_za = language.Make("za")
 var tag_za_CN = language.Make("za_CN")
 var tag_zgh = language.Make("zgh")
